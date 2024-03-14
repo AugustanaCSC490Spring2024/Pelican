@@ -1,4 +1,3 @@
-// import { StatusBar } from 'expo-status-bar';
 import React, {useState} from 'react';
 import { Button, Alert, StyleSheet, Text, View } from 'react-native';
 
