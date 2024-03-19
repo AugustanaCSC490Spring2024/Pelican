@@ -1,43 +1,24 @@
-import React, {useState} from 'react';
-import { Button, Alert, StyleSheet, Text, View } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { navigationRef } from './RootNavigation';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import LandingPage from "./screens/LandingPage";
+import Onboarding from "./screens/Onboarding";
 
-const setTitle = () => {
-  setTitleText("Welcome!");
-}
-
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.name}>
-        Campus
-        {"\n"}
-        Marketplace
-        {"\n"}
-        App
-      </Text>
-      <Button style={styles.button} onPress={()=>Alert.alert('You tapped the button!')} title="Tap to Begin"/>
-    </View>
+    <SafeAreaProvider>
+      <NavigationContainer ref={navigationRef}>
+        <Stack.Navigator 
+          options={{ headerShown: false }} 
+          initialRouteName='Landing'
+          >
+          <Stack.Screen name="Landing" component={LandingPage}/>
+          <Stack.Screen name="Onboarding" component={Onboarding}/>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'left',
-    justifyContent: 'center',
-    paddingLeft: 30
-  },
-  name: {
-    fontSize: 50,
-    fontWeight: 'bold',
-    marginBottom: 50
-  },
-  button: {
-    // alignItems: 'center',
-    // textAlign: 'center',
-    // padding: 10,
-    // borderRadius: 10,
-  }
-});
