@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { ProgressBar } from 'react-native-paper';
- 
+import * as RootNavigation from '../RootNavigation';
+import Home from './Home';
+
+
 // Progress Bar - Consider not using
 const MyProgressBar = () => (
     <ProgressBar progress={0.3} styleAttr="Horizontal" indeterminate={true} color='rgba(100,10,10,1)'/>
@@ -52,11 +55,7 @@ export default function Onboarding() {
   };
 //   render() {
     if (showRealApp) {
-        return (
-          <View style={styles.container}>
-            <Text>App</Text>
-          </View>
-        );
+        RootNavigation.navigate('Home');
     } else {
       return <AppIntroSlider renderItem={this._renderItem} data={slides} onDone={this._onDone}/>;
     }
