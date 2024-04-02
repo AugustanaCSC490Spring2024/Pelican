@@ -1,4 +1,4 @@
-rootProject.name = 'PelicanMarketplace'
+rootProject.name = 'Pelican MarketPlace'
 
 dependencyResolutionManagement {
   versionCatalogs {

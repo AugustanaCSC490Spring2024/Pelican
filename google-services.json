@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "354512485882",
+    "project_id": "pelican-marketplace-app",
+    "storage_bucket": "pelican-marketplace-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354512485882:android:4bd49d0f6160d25a5cf843",
+        "android_client_info": {
+          "package_name": "com.augustana.PelicanMarketplace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "354512485882-s5bm4dtsbpvdb8tcn7vcsk9uq1bs2a0r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.augustana.PelicanMarketplace",
+            "certificate_hash": "a2f3450248cb0ee31b7baad44dc8f29c049a354f"
+          }
+        },
+        {
+          "client_id": "354512485882-kl4hbo3936mu38lm19k8sq4pnvg54jm4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfD02Mqn2HwQfGdCyhJlv2hUoNOSTl0Dc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "354512485882-kl4hbo3936mu38lm19k8sq4pnvg54jm4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "354512485882-5kbk16p57ig6nvrdaj2rlobc5ngd0jfq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.augustana.PelicanMarketplace"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,4 @@
-package com.nhile_2209.PelicanMarketplace
+package com.augustana.PelicanMarketplace
 
 import android.app.Application
 import android.content.res.Configuration

@@ -1,26 +1,45 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import { navigationRef } from './RootNavigation';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import LandingPage from "./screens/LandingPage";
-import Onboarding from "./screens/Onboarding";
 import { View } from 'react-native';
-import { Link } from 'expo-router';
+import { AppProvider } from './AppContext';
+import { Redirect, useRootNavigationState } from 'expo-router';
+import auth from '@react-native-firebase/auth';
+import React, { useState, useEffect } from 'react';
+import AuthContainer from './services/authContainer';
+import firebaseConfig from './firebaseConfig';
+import { useNavigationContainerRef} from 'expo-router';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+GoogleSignin.configure({
+  webClientId: "354512485882-kl4hbo3936mu38lm19k8sq4pnvg54jm4.apps.googleusercontent.com",
+});
+
+  export default function App() {
+
   return (
+
+    // <SafeAreaProvider>
+    //   {/* <NavigationContainer> */}
+    //     <Stack.Navigator
+    //       options={{ headerShown: false }} 
+    //       // initialRouteName='AuthContainer'
+    //       >
+    //       <Stack.Screen name="Onboarding" component={Onboarding}/>
+    //       <Stack.Screen name="AuthContainer" component={AuthContainer} />
+    //     </Stack.Navigator >
+    //   {/* </NavigationContainer> */}
+    // </SafeAreaProvider>
+
     <SafeAreaProvider>
-      <NavigationContainer ref={navigationRef}>
-        <Stack.Navigator 
-          options={{ headerShown: false }} 
-          initialRouteName='Landing'
-          >
-          <Stack.Screen name="Landing" component={LandingPage}/>
-          <Stack.Screen name="Onboarding" component={Onboarding}/>
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
-  );
+      <AppProvider>
+        <View>
+          <AuthContainer />
+        </View>
+      </AppProvider>
+  </SafeAreaProvider>
+  )
 }
+

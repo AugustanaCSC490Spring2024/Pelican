@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>354512485882-5kbk16p57ig6nvrdaj2rlobc5ngd0jfq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.354512485882-5kbk16p57ig6nvrdaj2rlobc5ngd0jfq</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>354512485882-s5bm4dtsbpvdb8tcn7vcsk9uq1bs2a0r.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBZO0-K77ZtvoMGx8GOvsaXxf7t8TcTlDA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>354512485882</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.augustana.PelicanMarketplace</string>
+	<key>PROJECT_ID</key>
+	<string>pelican-marketplace-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>pelican-marketplace-app.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:354512485882:ios:44080220f969e34a5cf843</string>
+</dict>
+</plist>

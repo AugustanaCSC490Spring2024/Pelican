@@ -5,15 +5,12 @@
     <key>EXUpdatesCheckOnLaunch</key>
     <string>ALWAYS</string>
     <key>EXUpdatesEnabled</key>
-    <false/>
+    <true/>
     <key>EXUpdatesLaunchWaitMs</key>
     <integer>0</integer>
     <key>EXUpdatesSDKVersion</key>
     <string>50.0.0</string>
-
-    <key>EXUpdatesSDKVersion</key>
-    <string>YOUR-APP-SDK-VERSION-HERE</string>
     <key>EXUpdatesURL</key>
-    <string>YOUR-APP-URL-HERE</string>
+    <string>https://exp.host/@nhile_2209/PelicanMarketPlace</string>
   </dict>
 </plist>
