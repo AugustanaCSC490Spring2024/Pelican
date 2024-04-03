@@ -24,7 +24,8 @@ export default AuthContainer = () => {
 
     return (
         <NavigationContainer>
-            {user ? <Home /> : <Auth />}
+            {/* {user ? <Home /> : <Auth />} */}
+            <Auth/>
         </NavigationContainer>
     )
 }

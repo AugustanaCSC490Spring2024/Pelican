@@ -9,6 +9,8 @@ import LogoImage from '../assets/monochrome-icon.png';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import auth from '@react-native-firebase/auth';
 import {useRouter} from 'expo-router';
+import AppIntroSlider from 'react-native-app-intro-slider';
+import Onboarding from '../screens/Onboarding';
 
 export default function Auth(){
   // Log in/ Sign up 
@@ -76,13 +78,12 @@ export default function Auth(){
 
     return(
       <SafeAreaView style={styles.container}>
-        {/* <View style={styles.sliderContainer}> */}
-          {/* <AppIntroSlider renderItem={this._renderItem} data={slides} onDone={this._onDone}/>; */}
-          {/* <Onboarding/> */}
-        {/* </View> */}
-        {/* <View style={styles.loginContainer}> */}
+        <View style={styles.sliderContainer}>
+          <Onboarding />
+        </View>
+        <View style={styles.loginContainer}>
           <Image style={styles.image} source={LogoImage} />
-          <Text style={styles.title}>WELCOME TO PELICAN MARKETPLACE </Text> 
+          <Text style={styles.title}>WELCOME TO {'\n'}PELICAN MARKETPLACE </Text> 
           <Text style={styles.text}>Please sign up or log in with your Augustana account to ensure the safety of our community!</Text>
           <GoogleSigninButton
               size={GoogleSigninButton.Size.Wide}
@@ -90,7 +91,7 @@ export default function Auth(){
               onPress={signIn}
               // disabled={this.state.isSigninInProgress}
           />
-        {/* </View> */}
+        </View>
       </SafeAreaView>
     )
 }
@@ -99,19 +100,16 @@ export default function Auth(){
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     backgroundColor: 'white',
     justifyContent: 'center',
     alignContent: 'center',
-    padding: 10,
+    paddingHorizontal: 25,
   },
   sliderContainer: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   loginContainer: {
-      flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
   },

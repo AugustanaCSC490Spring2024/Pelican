@@ -5,11 +5,6 @@ import { ProgressBar } from 'react-native-paper';
 import LogoImage from '../assets/monochrome-icon.png';
 import { useNavigation } from '@react-navigation/native';
 import { useRouter } from "expo-router";
-// import Auth from '../services/auth';
-// Progress Bar - Consider not using
-const MyProgressBar = () => (
-    <ProgressBar progress={0.3} styleAttr="Horizontal" indeterminate={true} color='rgba(100,10,10,1)'/>
-)
 
 const slides = [
   {
@@ -37,7 +32,6 @@ const slides = [
  
 export default function Onboarding() {
   const [showRealApp, setShowRealApp] = useState(false);
-  // const navigation = useNavigation();
   const router = useRouter();
   _renderItem = ({ item }) => {
     return (
@@ -51,31 +45,11 @@ export default function Onboarding() {
   _onDone = () => {
     // User finished the introduction. Show real app through
     // navigation or simply by controlling state
-    // this.setState({ showRealApp: true });
     setShowRealApp(true);
   };
-//   render() {
-    // if (showRealApp) {
-    //     return (
-    //       <View style={styles.container}>
-    //         <Text style={styles.title}>WELCOME TO{'\n'}PELICAN MARKETPLACE</Text>
-    //         <Image style={styles.image} source={LogoImage}/>
-    //         <TouchableOpacity
-    //           style={styles.button}
-    //           // onPress={() => navigation.navigate('Auth')}
-    //           // onPress={() => router.replace(Auth)}
-    //           // onPress={nextPage}
-              
-    //         >
-    //           <Text style={styles.buttonText}>Get Started</Text>
-    //         </TouchableOpacity>
-    //       </View>
-    //     );
-    // } else {
-    //   return <AppIntroSlider renderItem={this._renderItem} data={slides} onDone={this._onDone}/>;
-      return <AppIntroSlider renderItem={this._renderItem} data={slides}/>;
-    // }
-//   }
+
+  return <AppIntroSlider renderItem={this._renderItem} data={slides} onDone={this._onDone}/>;
+      
 }
 
 const styles = StyleSheet.create({
