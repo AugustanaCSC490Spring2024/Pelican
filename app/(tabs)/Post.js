@@ -23,7 +23,7 @@ export default function App() {
                 <TouchableOpacity style={styles.camera} onPress={()=>{alert('Accessing the camera roll')}}>
                     <Image 
                         style={styles.img} 
-                        source={require('../assets/cameraRoll.jpeg')} 
+                        source={require('../../assets/cameraRoll.jpeg')} 
                     />
                 </TouchableOpacity>
                 <Text style={styles.camTxt}>Select From Camera Roll</Text>

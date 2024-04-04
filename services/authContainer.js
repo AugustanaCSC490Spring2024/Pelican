@@ -3,8 +3,9 @@ import React, { useState, useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import auth from '@react-native-firebase/auth'
 import firebase from '@react-native-firebase/app';
-import Home from '../tabs/Home';
+import Home from '../app/(tabs)/Home';
 import Auth from './auth';
+import BottomTab from '../app/(tabs)/bottomTab';
 
 export default AuthContainer = () => { 
     const [initializing, setInitializing] = useState(true)
@@ -24,8 +25,8 @@ export default AuthContainer = () => {
 
     return (
         <NavigationContainer>
-            {user ? <Home /> : <Auth />}
-            {/* <Auth/> */}
+            
+            {user ? (<><Home /><BottomTab /></>): <Auth /> }
         </NavigationContainer>
     )
 }

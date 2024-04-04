@@ -26,7 +26,7 @@ export default function Home() {
       return (
         <TouchableOpacity style={styles.post} onPress={ ()=>{ Alert.alert('You tapped on the product!') } }>
         <Image style={styles.tinyLogo}
-          source={require('../assets/icon.png')}/>
+          source={require('../../assets/icon.png')}/>
         <View style={styles.description}>
           <Text style={styles.postTitle}>{ copy[1] }</Text>
           <Text style={styles.seller}>jslee402</Text>
@@ -42,7 +42,7 @@ export default function Home() {
           products.map(function(prd, i){
             return(
               <TouchableOpacity style={styles.post} onPress={ ()=>{ Alert.alert('You tapped on the product!') } } key={i}>
-                <Image style={styles.tinyLogo} source={require('../assets/intro.png')}/>
+                <Image style={styles.tinyLogo} source={require('../../assets/icon.png')}/>
                 <View style={styles.description}>
                   <Text style={styles.postTitle}>{ prd }</Text>
                   <Text style={styles.seller}>{ copySeller[i] }</Text>

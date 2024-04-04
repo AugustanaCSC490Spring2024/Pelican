@@ -10,8 +10,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import auth from '@react-native-firebase/auth';
 import {useRouter} from 'expo-router';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import Onboarding from '../screens/Onboarding';
-import OnboardingSwiper from '../screens/onboardingSwiper';
+// import Onboarding from '../app/Onboarding';
+import OnboardingSwiper from '../app/onboardingSwiper';
 
 export default function Auth(){
   // Log in/ Sign up 

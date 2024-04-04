@@ -41,7 +41,7 @@ export default function App() {
                 products.map(function(prd, i){
                     return (
                         <TouchableOpacity style={styles.post} onPress={ ()=>{ Alert.alert('You tapped on the chat!') } }>
-                            <Image style={styles.tinyLogo} source={require('../assets/icon.png')} />
+                            <Image style={styles.tinyLogo} source={require('../../assets/icon.png')} />
                             <View style={styles.description}>
                                 <Text style={styles.postTitle}>{ prd }</Text>
                                 <Text style={styles.chatLog}>{ copyMsg[i] }</Text>
