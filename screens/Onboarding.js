@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, Button } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import { ProgressBar } from 'react-native-paper';
 import LogoImage from '../assets/monochrome-icon.png';
 import { useNavigation } from '@react-navigation/native';
 import { useRouter } from "expo-router";
@@ -58,6 +57,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: '#fff2',
+      width: '70%',
     },
     slide: {
       flex: 1,

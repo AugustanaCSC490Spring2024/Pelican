@@ -11,6 +11,7 @@ import auth from '@react-native-firebase/auth';
 import {useRouter} from 'expo-router';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Onboarding from '../screens/Onboarding';
+import OnboardingSwiper from '../screens/onboardingSwiper';
 
 export default function Auth(){
   // Log in/ Sign up 
@@ -79,7 +80,8 @@ export default function Auth(){
     return(
       <SafeAreaView style={styles.container}>
         <View style={styles.sliderContainer}>
-          <Onboarding />
+          {/* <Onboarding /> */}
+          <OnboardingSwiper />
         </View>
         <View style={styles.loginContainer}>
           <Image style={styles.image} source={LogoImage} />
@@ -100,29 +102,40 @@ export default function Auth(){
 
 const styles = StyleSheet.create({
   container: {
+    // display: 'flex',
+    // flexDirection: 'column',
+    flex: 1,
     backgroundColor: 'white',
     justifyContent: 'center',
     alignContent: 'center',
     paddingHorizontal: 25,
+    paddingVertical: 50,
+    minHeight: '100%',
   },
   sliderContainer: {
-    justifyContent: 'center',
+    // display: 'flex',
+    flex: 2,
     alignItems: 'center',
+    paddingVertical: 10,
   },
   loginContainer: {
-      justifyContent: 'center',
-      alignItems: 'center',
+    // display: 'flex',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 10,
+    marginVertical: 30,
   },
   image: {
     width: 100,
     height: 100,
     borderRadius: 10,
-    marginVertical: 30,
+    marginVertical: 20,
   },
   text: {
     color: 'black',
     fontSize: 12,
-    marginBottom: 70,
+    marginBottom: 20,
     textAlign: 'center'
   },
   title: {
@@ -130,6 +143,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 30
+    marginBottom: 10
   },
 })
