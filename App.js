@@ -10,6 +10,7 @@ import AuthContainer from './services/authContainer';
 import firebaseConfig from './firebaseConfig';
 import { useNavigationContainerRef} from 'expo-router';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import BottomTab from './tabs/bottomTab';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,24 +23,24 @@ GoogleSignin.configure({
   return (
 
     // <SafeAreaProvider>
-    //   {/* <NavigationContainer> */}
-    //     <Stack.Navigator
-    //       options={{ headerShown: false }} 
-    //       // initialRouteName='AuthContainer'
-    //       >
-    //       <Stack.Screen name="Onboarding" component={Onboarding}/>
-    //       <Stack.Screen name="AuthContainer" component={AuthContainer} />
-    //     </Stack.Navigator >
-    //   {/* </NavigationContainer> */}
+      <NavigationContainer>
+        <Stack.Navigator
+          options={{ headerShown: false }} 
+          initialRouteName='Landing'
+          >
+          <Stack.Screen name="AuthContainer" component={AuthContainer} />
+          <Stack.Screen name="BottomTab" component={BottomTab} />
+        </Stack.Navigator >
+      </NavigationContainer>
     // </SafeAreaProvider>
 
-    <SafeAreaProvider>
-      <AppProvider>
-        <View>
-          <AuthContainer />
-        </View>
-      </AppProvider>
-  </SafeAreaProvider>
+  //   <SafeAreaProvider>
+  //     <AppProvider>
+  //       <View>
+  //         <AuthContainer />
+  //         <BottomTab/>
+  //       </View>
+  //     </AppProvider>
+  // </SafeAreaProvider>
   )
 }
-

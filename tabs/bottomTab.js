@@ -1,5 +1,8 @@
 import { View, Text, Platform, SafeAreaView } from 'react-native';
-import { Home, Post, Chat } from "./screens";
+// import { Home, Post, Chat } from "../tabs";
+import Home from './Home';
+import Post from './Post';
+import Chat from './Chat';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';

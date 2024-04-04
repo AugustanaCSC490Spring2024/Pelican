@@ -47,8 +47,13 @@ export default function Onboarding() {
     setShowRealApp(true);
   };
 
-  return <AppIntroSlider renderItem={this._renderItem} data={slides} onDone={this._onDone}/>;
-      
+//   render() {
+    if (showRealApp) {
+        RootNavigation.navigate('Home');
+    } else {
+      return <AppIntroSlider renderItem={this._renderItem} data={slides} onDone={this._onDone}/>;
+    }
+//   }
 }
 
 const styles = StyleSheet.create({
