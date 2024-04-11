@@ -11,6 +11,7 @@ import firebaseConfig from './firebaseConfig';
 import { useNavigationContainerRef} from 'expo-router';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import BottomTab from './app/(tabs)/bottomTab';
+import firestore from '@react-native-firebase/firestore';
 
 const Stack = createNativeStackNavigator();
 

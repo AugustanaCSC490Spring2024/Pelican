@@ -1,9 +1,15 @@
+import React, { useState } from 'react';
 import { Text, TouchableOpacity, StyleSheet, TextInput, ScrollView, Image, View, Button } from 'react-native';
 import { SelectList } from 'react-native-dropdown-select-list';
-import React, { useState } from 'react';
+import { saveUserData } from '../../databasemanager'; 
 
 export default function App() {
-
+    const [productName, setProductName] = useState('');
+    const [productPrice, setProductPrice] = useState('');
+    const [productDescription, setProductDescription] = useState('');
+    const [productImage, setProductImage] = useState(''); 
+    const [sellerID, setSellerID] = useState('12345ABC');
+    const [sellerName, setSellerName] = useState('ABCD');
     const [selected, setSelected] = React.useState('');
 
     const categories = [
@@ -15,33 +21,39 @@ export default function App() {
         {key: '6', value: 'Services'},
         {key: '7', value: 'Textbooks'},
         {key: '8', value: 'etc.'}
-    ]
+    ];
 
     return (
         <ScrollView style={styles.container}>
             <View style={styles.selectBox}>
-                <TouchableOpacity style={styles.camera} onPress={()=>{alert('Accessing the camera roll')}}>
+                <TouchableOpacity style={styles.camera} onPress={() => { alert('Implement Image Selection Here') }}>
                     <Image 
                         style={styles.img} 
-                        source={require('../../assets/cameraRoll.jpeg')} 
+                        source={require('../../assets/cameraRoll.jpeg')}
                     />
                 </TouchableOpacity>
                 <Text style={styles.camTxt}>Select From Camera Roll</Text>
             </View>
-            <Text style={styles.tag}>Title</Text>
+            <Text style={styles.tag}>Product Name</Text>
             <TextInput 
                 style={styles.input}
-                placeholder='Product Name...' />
-            <Text style={styles.tag}>Price</Text>
+                placeholder='Product Name...'
+                value={productName}
+                onChangeText={setProductName} />
+            <Text style={styles.tag}>Product Price</Text>
             <TextInput 
                 style={styles.input}
-                placeholder='$$$' />
-            <Text style={styles.tag}>Description</Text>
+                placeholder='$$$'
+                value={productPrice}
+                onChangeText={setProductPrice} />
+            <Text style={styles.tag}>Product Description</Text>
             <TextInput 
                 style={styles.inputBox}
-                placeholder='Type here...' />
+                placeholder='Type here...'
+                value={productDescription}
+                onChangeText={setProductDescription} />
             <View style={styles.view}>
-                <Text style={styles.tag}>Category</Text>
+                <Text style={styles.tag}>Choose Category</Text>
                 <SelectList 
                     setSelected={(val) => setSelected(val)} 
                     data={categories} 
@@ -51,17 +63,21 @@ export default function App() {
             </View>
             <Button
                 title="Post"
-                style={styles.btn}
-                accessibilityLabel="Learn more about this purple button"
-                onPress={()=>{
-                    alert('You have posted a product!');
+                onPress={() => {
+                    if (!productName || !productPrice || !productDescription || !productImage || !sellerID || !sellerName) {
+                        alert('Please fill in all the details.');
+                        return;
+                    }
+                    saveUserData(productName, productPrice, productDescription, productImage, sellerID, sellerName)
+                        .then(() => alert('Product posted successfully!'))
+                        .catch(error => console.error('Failed to post product:', error));
                 }}
             />
         </ScrollView>
     );
 } 
 
-  const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     input: {
         width: '65%',
         height: '7%',
@@ -106,4 +122,4 @@ export default function App() {
     view: {
         marginBottom: 20
     }
-  });
+});
