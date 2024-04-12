@@ -1,24 +1,80 @@
-import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Tabs } from 'expo-router';
+import { View, Text, Platform, SafeAreaView } from 'react-native';
+import Home from './Home';
+import Post from './Post';
+import Chat from './Chat';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Entypo } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+
+const Tab = createBottomTabNavigator();
+const screenOptions = {
+  tabBarShowLabel: false,
+  headerShowen: false,
+  tabBarStyle: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    left: 0,
+    elevation: 0,
+    height: '12%',
+    backgroundColor: '#fff'
+  }
+}
 
 export default function TabLayout() {
-  return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: 'blue' }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="settings"
-        options={{
-          title: 'Settings',
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name="cog" color={color} />,
-        }}
-      />
-    </Tabs>
+  return(
+    <Tab.Navigator screenOptions={{ ...screenOptions, tabBarStyle: false }}>
+        <Tab.Screen  
+          name="Home" 
+          component={ Home } 
+          options={{
+            tabBarIcon: ({focused})=>{
+              return (
+                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                  <Entypo name="home" size={24} color={focused ? "#16247d" : '#aaa'} />
+                  <Text>HOME</Text>
+                </View>
+              )
+            }
+          }}
+        />
+        <Tab.Screen  
+          name="Post" 
+          component={ Post } 
+          options={{
+            tabBarIcon: ({focused})=>{
+              return (
+                <View 
+                  style={{ 
+                    top: Platform.OS == 'ios' ? -10 : -20,
+                    width: Platform.OS == 'ios' ? 60 : 70,
+                    height: Platform.OS == 'ios' ? 60 : 70,
+                    borderRadius: Platform.OS == 'ios' ? 30 : 30,
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                    backgroundColor: '#16247d' 
+                  }}
+                >
+                  <AntDesign name="plus" size={24} color={focused ? "#fff" : '#aaa'} />
+                </View>
+              )
+            }
+          }}
+        />
+        <Tab.Screen  
+          name="Chat" 
+          component={ Chat } 
+          options={{
+            tabBarIcon: ({focused})=>{
+              return (
+                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                  <Entypo name="chat" size={24} color={focused ? "#16247d" : '#aaa'} />
+                  <Text>CHAT</Text>
+                </View>
+              )
+            }
+          }}
+        />
+      </Tab.Navigator>
   );
 }

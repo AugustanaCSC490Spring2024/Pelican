@@ -46,6 +46,11 @@ export default function OnboardingSwiper() {
         showsHorizontalScrollIndicator={false}
         onScroll={handleScroll}
         style={styles.container}
+        contentOffset={{ x: activeSlide * width }}
+        decelerationRate={0}
+        snapToInterval={width}
+        // scrollEventThrottle={16}
+        // snapToAlignment="center"
       >
         {slides.map((slide, index) => (
           <View key={slide.key} style={styles.slide}>
@@ -70,14 +75,15 @@ export default function OnboardingSwiper() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    minHeight: 300,
+    minWidth: width,
+    // minHeight: 300,
   },
   slide: {
     flex: 1,
     width: width,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#9DD6EB',
+    // backgroundColor: '#9DD6EB',
     padding: 20
   },
   image: {
@@ -85,19 +91,19 @@ const styles = StyleSheet.create({
     height: '50%',
   },
   title: {
-    fontSize: 30,
+    fontSize: 22,
     fontWeight: 'bold',
     textAlign: 'center',
   },
   text: {
     marginBottom: 20,
     textAlign: 'center',
-    color: 'black'
+    color: 'black',
   },
   pagination: {
     flexDirection: 'row',
     position: 'absolute',
-    bottom: 10,
+    bottom: 30,
     alignSelf: 'center',
   },
   dot: {

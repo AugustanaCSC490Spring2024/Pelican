@@ -1,32 +1,67 @@
-import { View, Text } from 'react-native'
-import React, { useState, useEffect } from 'react'
-import { NavigationContainer } from '@react-navigation/native'
-import auth from '@react-native-firebase/auth'
-import firebase from '@react-native-firebase/app';
+import React, { createContext, useState, useEffect } from 'react';
+import { View, Text } from 'react-native';
+import auth from '@react-native-firebase/auth';
+import { useRouter, useSegments, Redirect, useRootNavigationState } from 'expo-router';
 import Home from '../app/(tabs)/Home';
 import Auth from './auth';
-import BottomTab from '../app/(tabs)/bottomTab';
+import { useNavigation } from '@react-navigation/native';
 
-export default AuthContainer = () => { 
-    const [initializing, setInitializing] = useState(true)
-    const [user, setUser] = useState()
+export const AuthContext = createContext({
+  user: null,
+  initializing: false,
+});
 
-    function onAuthStateChange(user) {
-        setUser(user)
-        if (initializing) setInitializing(false)
-    }
+export function AuthContainer() {
+  const { user, initializing } = React.useContext(AuthContext);
 
-    useEffect(() => {
-        const subscriber = auth().onAuthStateChanged(onAuthStateChange)
-        return subscriber
-    }, [])
-    
-    if (initializing) return null;
+  if (initializing) {
+    return <Text>Loading...</Text>;
+  }
 
-    return (
-        <NavigationContainer>
-            
-            {user ? (<><Home /><BottomTab /></>): <Auth /> }
-        </NavigationContainer>
-    )
+  return (
+    <View>
+      {user ? (
+        <Home />
+      ) : (
+        <Auth />
+      )}
+    </View>
+  );
 }
+
+export const AuthProvider = ({ children }) => {
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState(null);
+  const router = useRouter();
+  const segments = useSegments();
+
+  useEffect(() => {
+    const unsubscribe = auth().onAuthStateChanged(userState => {
+      setUser(userState);
+      setInitializing(false);
+    });
+    return unsubscribe;
+  }, []);
+
+  const useProtectedRoute = () => {
+    useEffect(() => {
+      const inTabsGroup = segments[0] === '(tabs)';
+      if (!user && inTabsGroup) {
+        router.replace('/auth');
+        console.log('NOT AUTHENTICATED: ');
+      } else if (user && !inTabsGroup) {
+        console.log('AUTHENTICATED: ', user);
+        router.replace('/(tabs)/Home');
+      }
+    }, [user]);
+  };
+
+  useProtectedRoute();
+
+  const value = {
+    user,
+    initializing,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};

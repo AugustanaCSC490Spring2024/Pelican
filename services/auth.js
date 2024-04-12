@@ -12,8 +12,14 @@ import {useRouter} from 'expo-router';
 import AppIntroSlider from 'react-native-app-intro-slider';
 // import Onboarding from '../app/Onboarding';
 import OnboardingSwiper from '../app/onboardingSwiper';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Auth(){
+  const [state, setState] = React.useState({
+    user: null,
+    hasPreviousSignIn: false,
+  });
+  const navigation = useNavigation();
   // Log in/ Sign up 
   GoogleSignin.configure({
     scopes: ['https://www.googleapis.com/auth/drive.readonly'],
@@ -21,6 +27,7 @@ export default function Auth(){
     iosClientId: "354512485882-5kbk16p57ig6nvrdaj2rlobc5ngd0jfq.apps.googleusercontent.com",
   });
 
+  
   const isSignedIn = async () => {
       const isSignedIn = await GoogleSignin.isSignedIn();
       setState({ isLoginScreenPresented: !isSignedIn });
@@ -49,11 +56,14 @@ export default function Auth(){
         const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
         // Sign-in the user with the credential
-        return auth().signInWithCredential(googleCredential).then(() => router.replace('../screens/Home'));
+        return auth().signInWithCredential(googleCredential).then(() => {
+          // router.replace('../app/(tabs)/Home')
+          navigation.navigate('Home');
+        })
         
         // ALternatvie way
         // auth().signInWithCredential(auth.GoogleAuthProvider.credential(user.idToken));
-
+        
       } catch (error) {
         console.log('error', error.code, error.message)
         if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -70,6 +80,7 @@ export default function Auth(){
 
     const signOut = async () => {
       try {
+        await GoogleSignin.revokeAccess();
         await GoogleSignin.signOut();
         setState({ user: null }); // Remember to remove the user from your app's state as well
       } catch (error) {
@@ -81,8 +92,9 @@ export default function Auth(){
       <SafeAreaView style={styles.container}>
         <View style={styles.sliderContainer}>
           {/* <Onboarding /> */}
-          <OnboardingSwiper />
+          <OnboardingSwiper/>
         </View>
+        <View style={styles.divider}></View>
         <View style={styles.loginContainer}>
           <Image style={styles.image} source={LogoImage} />
           <Text style={styles.title}>WELCOME TO {'\n'}PELICAN MARKETPLACE </Text> 
@@ -98,33 +110,29 @@ export default function Auth(){
     )
 }
 
-
-
 const styles = StyleSheet.create({
   container: {
-    // display: 'flex',
-    // flexDirection: 'column',
     flex: 1,
     backgroundColor: 'white',
     justifyContent: 'center',
     alignContent: 'center',
     paddingHorizontal: 25,
-    paddingVertical: 50,
+    paddingBottom: 25,
     minHeight: '100%',
+    justifyContent: 'space-between',
   },
   sliderContainer: {
-    // display: 'flex',
     flex: 2,
     alignItems: 'center',
-    paddingVertical: 10,
+    paddingVertical: 20,
+    marginTop: -80,
   },
   loginContainer: {
-    // display: 'flex',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 10,
     marginVertical: 30,
+    paddingVertical: 30,
   },
   image: {
     width: 100,
@@ -134,15 +142,19 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    fontSize: 12,
+    fontSize: 15,
     marginBottom: 20,
     textAlign: 'center'
   },
   title: {
     color: 'black',
-    fontSize: 18,
+    fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 10
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#EDEDED',
   },
 })
