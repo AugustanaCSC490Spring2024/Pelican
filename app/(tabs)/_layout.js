@@ -1,15 +1,16 @@
-import { View, Text, Platform, SafeAreaView } from 'react-native';
-import Home from './Home';
+import { View, Text, Platform } from 'react-native';
+import Home from './home';
 import Post from './Post';
 import Chat from './Chat';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import React from 'react';
 
 const Tab = createBottomTabNavigator();
 const screenOptions = {
   tabBarShowLabel: false,
-  headerShowen: false,
+  headerShown: false,
   tabBarStyle: {
     position: 'absolute',
     bottom: 0,

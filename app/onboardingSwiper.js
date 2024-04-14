@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   pagination: {
     flexDirection: 'row',
     position: 'absolute',
-    bottom: 30,
+    bottom: 20,
     alignSelf: 'center',
   },
   dot: {

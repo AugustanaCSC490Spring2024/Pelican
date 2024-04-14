@@ -83,7 +83,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.pelicanmarketplace"
+    namespace 'com.augustana.PelicanMarketplace'
     defaultConfig {
         applicationId 'com.augustana.PelicanMarketplace'
         minSdkVersion rootProject.ext.minSdkVersion

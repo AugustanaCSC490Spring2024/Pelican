@@ -89,12 +89,7 @@ export default function Auth(){
     };
 
     return(
-      <SafeAreaView style={styles.container}>
-        <View style={styles.sliderContainer}>
-          {/* <Onboarding /> */}
-          <OnboardingSwiper/>
-        </View>
-        <View style={styles.divider}></View>
+      <View style={styles.container}>
         <View style={styles.loginContainer}>
           <Image style={styles.image} source={LogoImage} />
           <Text style={styles.title}>WELCOME TO {'\n'}PELICAN MARKETPLACE </Text> 
@@ -106,7 +101,12 @@ export default function Auth(){
               // disabled={this.state.isSigninInProgress}
           />
         </View>
-      </SafeAreaView>
+        <View style={styles.divider}></View>
+        <View style={styles.sliderContainer}>
+          {/* <Onboarding /> */}
+          <OnboardingSwiper/>
+        </View>
+      </View>
     )
 }
 
@@ -114,25 +114,30 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    justifyContent: 'center',
-    alignContent: 'center',
     paddingHorizontal: 25,
-    paddingBottom: 25,
+    paddingVertical: 25,
     minHeight: '100%',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+    justifyContent: 'center',
   },
   sliderContainer: {
-    flex: 2,
+    flex: 1,
     alignItems: 'center',
-    paddingVertical: 20,
-    marginTop: -80,
+    // marginVertical: 30,
+    // paddingVertical: 30,
+    height: '40%',
+    bottom: 0,
   },
   loginContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 30,
-    paddingVertical: 30,
+    paddingVertical: 20,
+    top: 0,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#EDEDED',
   },
   image: {
     width: 100,
@@ -152,9 +157,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 10
-  },
-  divider: {
-    height: 1,
-    backgroundColor: '#EDEDED',
   },
 })
