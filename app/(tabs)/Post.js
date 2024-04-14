@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, StyleSheet, TextInput, ScrollView, Image, View,
 import { SelectList } from 'react-native-dropdown-select-list';
 import { saveUserData } from '../../databasemanager'; 
 
-export default function App() {
+export default function Post() {
     const [productName, setProductName] = useState('');
     const [productPrice, setProductPrice] = useState('');
     const [productDescription, setProductDescription] = useState('');

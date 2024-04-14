@@ -2,7 +2,7 @@ import { Text, View, StyleSheet, Button, TouchableOpacity, Image, ScrollView, Al
 import React, { useState } from 'react';
 
   
-export default function App() {
+export default function Chat() {
 
     let [products, setName] = React.useState(
         ['POLO Sweater', 'iPhone X', 'Galaxy S9', 'Used Textbook', 'Coffee Machine', 'Easter Egg', 'Nuke']

@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import { useRouter, useSegments, Redirect, useRootNavigationState } from 'expo-router';
-import Home from '../app/(tabs)/Home';
+import Home from '../app/(tabs)/home';
 import Auth from './auth';
 import { useNavigation } from '@react-navigation/native';
 
@@ -19,7 +19,7 @@ export function AuthContainer() {
   }
 
   return (
-    <View>
+    <View style={{ height: '100%' }}>
       {user ? (
         <Home />
       ) : (
@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
         console.log('NOT AUTHENTICATED: ');
       } else if (user && !inTabsGroup) {
         console.log('AUTHENTICATED: ', user);
-        router.replace('/(tabs)/Home');
+        router.replace('/(tabs)/home');
       }
     }, [user]);
   };

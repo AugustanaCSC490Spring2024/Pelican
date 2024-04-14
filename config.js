@@ -1,6 +1,6 @@
 import firebase from '@react-native-firebase/app';
 
-const firebaseConfig = {
+const config = {
   apiKey: "AIzaSyCFE3jK_6IA6rr7F9BDSsYtSP0BziYBtDM",
   authDomain: "pelican-marketplace-app.firebaseapp.com",
   projectId: "pelican-marketplace-app",
@@ -11,7 +11,7 @@ const firebaseConfig = {
 };
 
 if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(config);
 }
 
 export { firebase };

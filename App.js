@@ -1,18 +1,12 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native'; 
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { View, Text } from 'react-native';
-import { AppProvider } from './AppContext';
-import { Redirect, useRootNavigationState, useRouter } from 'expo-router';
-import auth from '@react-native-firebase/auth';
 import React from 'react';
-import { useNavigationContainerRef, Red} from 'expo-router';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import TabLayout from './app/(tabs)/_layout';
-import AppLoading from 'expo-app-loading';
-import Home from './app/(tabs)/Home';
+import Home from './app/(tabs)/home';
 import {AuthContainer} from './services/authContainer';
-import { useNavigation } from '@react-navigation/native';
+import Post from './app/(tabs)/Post';
+import Chat from './app/(tabs)/Chat';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,11 +17,19 @@ GoogleSignin.configure({
   export default function App() {
     return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator  initialRouteName="Tab">
         <Stack.Screen name="Auth" component={AuthContainer} options={{ headerShown: true }} />
-        <Stack.Screen name="Tab" component={TabLayout} options={{ headerShown: true }} />
         <Stack.Screen name="Home" component={Home} options={{ headerShown: true }} />
+        <Stack.Screen name="Tab" component={TabLayout} options={{ headerShown: true }} />
+        {/* <Stack.Screen name="Post" component={Post} options={{ headerShown: true }} />
+        <Stack.Screen name="Chat" component={Chat} options={{ headerShown: true }} /> */}
       </Stack.Navigator>
     </NavigationContainer>
+
+    // <NavigationContainer>
+    //   <AuthContainer />
+    //   {/* <Home />
+    //   <TabLayout /> */}
+    // </NavigationContainer>
     )
 }
