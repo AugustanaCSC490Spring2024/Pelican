@@ -1,10 +1,12 @@
 import { Text, TouchableOpacity, StyleSheet, TextInput, ScrollView, Image, View, Button } from 'react-native';
 import { SelectList } from 'react-native-dropdown-select-list';
 import React, { useState } from 'react';
+import * as RootNavigation from '../RootNavigation';
+import camera from '../camera/camera.js';
+import { openMediaLibrary } from '../camera/mediaLibrary.js';
 
 export default function App() {
-
-    const [selected, setSelected] = React.useState('');
+    // const [selected, setSelected] = React.useState('');
 
     const categories = [
         {key: '1', value: 'Apparells'},
@@ -17,16 +19,35 @@ export default function App() {
         {key: '8', value: 'etc.'}
     ]
 
+    handleOpenMediaLibrary = async () => {
+        const chosenPhoto = await openMediaLibrary();
+        // Handle the result
+    };
+      
+    handleOpenCamera = async () => {
+        RootNavigation.navigate('camera');
+    };
+
+    
     return (
         <ScrollView style={styles.container}>
             <View style={styles.selectBox}>
-                <TouchableOpacity style={styles.camera} onPress={()=>{alert('Accessing the camera roll')}}>
+                <TouchableOpacity style={styles.camera} onPress={ this.handleOpenCamera }>
+                    <Image 
+                        style={styles.img} 
+                        source={require('../assets/camera.jpeg')} 
+                    />
+                </TouchableOpacity>
+                {/* <Text style={styles.camTxt}>Take Photo</Text> */}
+                {/* <Text style={styles.tag}>Title</Text> */}
+                <TouchableOpacity style={styles.cameraRoll} onPress={ this.handleOpenMediaLibrary }>
                     <Image 
                         style={styles.img} 
                         source={require('../assets/cameraRoll.jpeg')} 
                     />
                 </TouchableOpacity>
-                <Text style={styles.camTxt}>Select From Camera Roll</Text>
+                {/* <Text style={styles.camRollTxt}>Choose Photo</Text> */}
+                {/* <Text style={styles.tag}>Title</Text> */}
             </View>
             <Text style={styles.tag}>Title</Text>
             <TextInput 
@@ -82,17 +103,24 @@ export default function App() {
         flexDirection: "row"
     },
     camera: {
-        marginBottom: 10,
-        flex: 1
+        flex: 1,
+        marginBottom: 10
+    },
+    cameraRoll: {
+        flex: 2,
+        marginBottom: 10
     },
     img: {
         width: 100,
         height: 100
     },
     camTxt: {
-        flex: 2,
         fontSize: 20,
-        paddingTop: 10
+        marginBottom: 10
+    },
+    camRollTxt: {
+        fontSize: 20,
+        marginBottom: 10
     },
     inputBox: {
         width: '100%',
@@ -107,3 +135,5 @@ export default function App() {
         marginBottom: 20
     }
   });
+  
+  
