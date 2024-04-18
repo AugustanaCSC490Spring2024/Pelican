@@ -45,21 +45,3 @@
   color: black;
 }
 
-/* Post Sytle */
-.post {
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  margin-bottom: 5px;
-  margin-top: 5px;
-}
-.prd-img {
-  width: 100%
-}
-.prd-info {
-  padding-left: 15px;
-  padding-top: 15px;
-}
-.prd-info h5 {
-  font-size: 2em;
-  margin: 0;
-}
