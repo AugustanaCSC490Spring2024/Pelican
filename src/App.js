@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <header className='navbar'>
-        <h2>Pelican Marketplace</h2>
+        <h1>Pelican Marketplace</h1>
       </header>
       <ProductView/>
     </div>
