@@ -4,10 +4,17 @@ import { SearchBar } from "./component/SearchComponents/SearchBar.js";
 import { SearchResultsList } from "./component/SearchComponents/SearchResultsList";
 import ProductView from './component/Products/productView';
 import logoTrans from './assets/logo-trans.png';
-
+import AddProductForm from './component/Products/addProductForm.js'
 
 function App() {
   const [results, setResults] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+
+  const handleShowForm = (e) => {
+    e.preventDefault();
+    setShowForm(true);
+  };
+
   return (
     <div className="App">
       <div className='navbar'>
@@ -23,9 +30,13 @@ function App() {
           <li className='link-item'><a href=''>Home</a></li>
           <li className='link-item'><a href=''>Chat</a></li>
           <li className='link-item post-btn'><a href=''>Post</a></li>
+          <li className='link-item post-btn'><a href='' onClick={handleShowForm}>Add Product</a></li>
         </ul>
       </div>
-      <ProductView/>
+      {/* <ProductView/> */}
+      {/* <AddProductForm /> */}
+      {/* Put here temporarily - will modify where to put later */}
+      {showForm ? <AddProductForm /> : <ProductView />}
     </div>
   );
 }
