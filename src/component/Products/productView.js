@@ -1,7 +1,6 @@
 import useProducts from "./useProducts";
 import logo from '../../assets/icon.png'
-import React, { StyleSheet } from 'react';
-// import { StyleSheet } from 'react-native';
+import React from 'react';
 
 
 const ProductView = () => {
