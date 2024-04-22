@@ -3,6 +3,21 @@
   /* padding-left: 15px; */
 }
 
+.justify {
+  max-width: 1477px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.adjust {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
 /* Navbar Style */
 .navbar {
   display: flex;
@@ -52,13 +67,16 @@
   margin-bottom: 5px;
   margin-top: 5px;
 }
+
 .prd-img {
   width: 100%
 }
+
 .prd-info {
   padding-left: 15px;
   padding-top: 15px;
 }
+
 .prd-info h5 {
   font-size: 2em;
   margin: 0;

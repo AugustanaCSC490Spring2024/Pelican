@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { db } from './data/firebase';
 import { collection, getDocs } from 'firebase/firestore';
+<script src="https://apis.google.com/js/api.js" async defer></script>
 // import { doc } from '@firebase/firestore';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
