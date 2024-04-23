@@ -1,13 +1,13 @@
 import './App.css';
 import React, { useState } from 'react';
-import { SearchBar } from "./component/SearchComponents/SearchBar.js";
-import { SearchResultsList } from "./component/SearchComponents/SearchResultsList";
 import ProductView from './component/Products/productView';
 import logoTrans from './assets/logo-trans.png';
-import AddProductForm from './component/Products/addProductForm.js'
+import AddProductForm from './component/Products/addProductForm.js';
+import { db } from './data/firebase.js';
+import SearchComponent from './component/SearchComponents/SearchBar.js';
+
 
 function App() {
-  const [results, setResults] = useState([]);
   const [showForm, setShowForm] = useState(false);
 
   const handleShowForm = (e) => {
@@ -22,9 +22,8 @@ function App() {
           <img src={logoTrans} alt='logo' style={{width: '70px', height: '70px'}}></img>
           <h2>Pelican Marketplace</h2>
         </div>
-        <div className = "search-bar-container">
-          <SearchBar setResults={setResults}/>
-          {results && results.length > 0 && <SearchResultsList results={results}/>}
+        <div>
+          <SearchComponent db={db} />
         </div>
         <ul className='nav-links'>
           <li className='link-item'><a href=''>Home</a></li>
