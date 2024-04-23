@@ -3,17 +3,20 @@ import { useEffect } from 'react';
 const SignIn = () => {
     useEffect(() => {
         if (window.gapi) {
+            console.log("Google API found. Initializing auth2...");
             window.gapi.load('auth2', () => {
                 window.gapi.auth2.init({
-                    client_id: '354512485882-ea968m8en83dr08svv1gkin8ns9etofu.apps.googleusercontent.com'
-                }).then(() => {
+                    client_id: '354512485882-ea968m8en83dr08svv1gkin8ns9etofu.apps.googleusercontent.com',
+                })
+                .then(() => {
                     console.log('Google API client library loaded successfully.');
-                }).catch(error => {
+                })
+                .catch(error => {
                     console.error('Error initializing Google API client library:', error);
                 });
             });
         } else {
-            console.error("Google API client library failed to load.");
+            console.error("Google API not found.");
         }
     }, []);
     

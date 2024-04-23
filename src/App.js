@@ -1,73 +1,44 @@
-import logo from './icon.png';
-import './App.css';
-import './tailwind.css'
-import React, {  useState } from 'react';
-import SignIn from './signin';
-
+import logo from './logo.svg';
+import { useState } from 'react';
+import { GoogleLogin } from '@react-oauth/google';
+import { GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
+import { auth } from './firebase';
 
 function App() {
+  const [user, setUser] = useState(null);
 
-  const [isSignedIn, setIsSignedIn] = useState(false);
-  const handleSignIn = () => setIsSignedIn(true);
+  const handleGoogleLogin = async (credentialResponse) => {
+    try {
+      const idToken = credentialResponse.credential;
 
+      const credential = GoogleAuthProvider.credential(idToken);
 
-  let [products, setName] = React.useState(
-    ['POLO Sweater', 'iPhone X', 'Galaxy S9', 'Used Textbook', 'Coffee Machine', 'Easter Egg', 'Nuke']
-  );
+      const userCredential = await signInWithCredential(auth, credential);
 
-  let [price, setPrice] = React.useState(
-    ['$15', '$200', '$220', '$20', '$22', 'Free', '$1,000,000']
-  )
-
-  let [sellers, setSeller] = React.useState(
-    ['jslee402', 'XanderBender', 'SobanTuban', 'StephanieCurry', 'Stonedahl101', 'Rockdahl102', 'NorthKorea']
-  )
-
-  let copyPrice = [...price]
-  let copySeller = [...sellers]
+      setUser(userCredential.user);
+      console.log('User signed in:', userCredential.user);
+    } catch (error) {
+      console.error('Firebase sign-in error:', error);
+    }
+  };
 
   return (
     <div className="App">
-      {!isSignedIn ? (
-        <SignIn onSignIn={handleSignIn} />
-      ) : (
-        // Your main app content goes here, replace the div below with your main content
-        <div>Main Page Content Here</div>
-      )}
+      <header className="App-header">
+      <img src={logo} className="App-logo" alt="logo" />
+        {user ? (
+          <p>Welcome, {user.displayName}!</p>
+        ) : (
+          <>
+            <p>Google Authentication.</p>
+            <GoogleLogin
+              onSuccess={handleGoogleLogin}
+              onError={() => console.log('Login Failed')}
+            />
+          </>
+        )}
+      </header>
     </div>
-    
-    // <div className="App">
-    //   <div className='navbar'>
-    //     <h2>Pelican Marketplace</h2>
-    //     <ul className='nav-links'>
-    //       <li className='link-item'><a href=''>Home</a></li>
-    //       <li className='link-item'><a href=''>Chat</a></li>
-    //       <li className='link-item post-btn'><a href=''>Post</a></li>
-    //     </ul>
-    //   </div>
-
-    //   {/* <button onClick={ ()=> {
-    //     let copy = [...price];
-    //     copy.sort();
-    //     setPrice(copy);
-    //   } }>Sort by Price</button> */}
-
-    //   {
-    //     products.map(function(prd,i){
-    //       return (
-    //         <div className='post justify adjust'> 
-    //           <img src={logo} className='prd-img'/>
-    //           <div className='prd-info'>
-    //             <h5>{ prd }</h5>
-    //             <p>{ copySeller[i] }</p>
-    //             <p>{ copyPrice[i] }</p>
-    //           </div>
-    //         </div>
-    //       )
-    //     })
-    //   }
-
-    // </div>
   );
 }
 
