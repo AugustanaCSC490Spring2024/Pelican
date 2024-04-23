@@ -6,14 +6,13 @@ import React from 'react';
 const ProductView = () => {
     const products = useProducts();
     return (
-        <div>
+        <div style = {styles.post}>
             {products.map((product) => (
-                <div key={product.key} style={styles.post}>
+                <div key={product.key} style={styles.postItem}>
                     <img alt="img" src={logo} style={styles.prdImg}/>
-                    <div style={styles.prdInfo}>
-                        <h2 style={styles.prdInfoH5}>{product.name}</h2>
-                        <p>{product.user}</p>
-                        <p>${Number(product.price).toLocaleString()}</p>
+                    <div style={{textAlign: 'center'}}>
+                        <h2 style={styles.prdInfoH2}> {product.name} - ${Number(product.price).toLocaleString()} </h2>
+                        <p style ={styles.prdUser}> @{product.user} </p>
                     </div>
                 </div>
             ))}
@@ -25,21 +24,23 @@ const styles = {
     /* Post Style */
     post: {
         display: 'grid',
-        gridTemplateColumns: '1fr 4fr',
-        marginBottom: '5px',
-        marginTop: '5px',
+        gridTemplateColumns: '2fr 2fr 2fr',
+    },
+    postItem: {
+        margin: '5px',
+        border: '5px',
     },
     prdImg: {
         width: '100%',
     },
-    prdInfo: {
-        paddingLeft: '15px',
-        paddingTop: '15px',
+    prdUser: {
+        fontSize: '1.5em',
+        margin: 10,
     },
-    prdInfoH5: {
+    prdInfoH2: {
         fontSize: '2em',
-        margin: '0',
-    },
+        margin: 10,
+    }
 };
 
 export default ProductView;
