@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "@firebase/firestore";
+import { getAuth } from 'firebase/auth';
 // import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -8,7 +9,7 @@ import { getFirestore } from "@firebase/firestore";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCFE3jK_6IA6rr7F9BDSsYtSP0BziYBtDM",
+  apiKey: "AIzaSyAuhorJeBRlYhzJ1YbGytZYayWcy6QSlbk",
   authDomain: "pelican-marketplace-app.firebaseapp.com",
   databaseURL: "https://pelican-marketplace-app-default-rtdb.firebaseio.com",
   projectId: "pelican-marketplace-app",
@@ -18,6 +19,7 @@ const firebaseConfig = {
   measurementId: "G-KBY11FZQVF"
 };
 
+//apiKey: AIzaSyCFE3jK_6IA6rr7F9BDSsYtSP0BziYBtDM
 
 // Help debug missing credentials (later)
 if (!firebaseConfig.apiKey) throw new Error("Missing Firebase credentials: apiKey");
@@ -33,5 +35,7 @@ if (!firebaseConfig.measurementId) throw new Error("Missing Firebase credentials
 const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
-export { db, app };
+export { db, app, auth };
+

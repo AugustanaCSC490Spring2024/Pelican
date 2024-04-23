@@ -24,11 +24,16 @@ function AddProductForm() {
         });
     }
 
+    // Handle Image Upload
     const handleImageChange = (e) => {
         setProduct({
             ...product,
             image: URL.createObjectURL(e.target.files[0]),
         });
+    }
+
+    const saveImage = async (image) => {
+
     }
 
     const handleSubmit = async (e) => {
