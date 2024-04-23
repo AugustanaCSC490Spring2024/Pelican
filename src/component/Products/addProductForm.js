@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { db } from '../../data/firebase';
+import { collection, addDoc } from 'firebase/firestore'; 
 
 function AddProductForm() {
     const [product, setProduct] = useState({
@@ -12,6 +14,7 @@ function AddProductForm() {
         location: '',
         isShoppingList: false,
     });
+    const [message, setMessage] = useState("");
     const fileInput = useRef(null);
 
     const handleChange = (e) => {
@@ -21,6 +24,7 @@ function AddProductForm() {
         });
     }
 
+    // Handle Image Upload
     const handleImageChange = (e) => {
         setProduct({
             ...product,
@@ -28,10 +32,23 @@ function AddProductForm() {
         });
     }
 
-    const handleSubmit = (e) => {
+    const saveImage = async (image) => {
+
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         product.id = Date.now();
         console.log(product);
+        try {
+            const docRef = await addDoc(collection(db, "products"), product);
+            console.log("Document written with ID: ", docRef.id);
+            setMessage("Product added successfully");
+            resetForm();
+        } catch (error) {
+            console.error(error);
+            setMessage(`Error: ${error.message}`);
+        }
     }
 
     const resetForm = () => {
@@ -50,10 +67,21 @@ function AddProductForm() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="text" name="name" placeholder="Product Name" value={product.name} onChange={handleChange} />
+        <form onSubmit={handleSubmit} style={{ margin: '20px', padding: '20px' }}>
+            <h2>Add Product</h2>
+                <input 
+                    type="text" 
+                    name="name" 
+                    placeholder="Product Name" 
+                    spellCheck="false"
+                    autoCapitalize='words'
+                    style={styles.nameInputWrapper}
+                    value={product.name} 
+                    onChange={handleChange} 
+                />
             <input type="text" name="price" placeholder="Price" value={product.price} onChange={handleChange} />
-            <input type="text" name="seller" placeholder="Seller" value={product.seller} onChange={handleChange} />
+            {/* Try to get seller's id from authentication */}
+            {/* <input type="text" name="seller" placeholder="Seller" value={product.seller} onChange={handleChange} /> */}
             <input type="text" name="description" placeholder="Description" value={product.description} onChange={handleChange} />
             <select name="status" value={product.status} onChange={handleChange}>
                 <option value="available">Available</option>
@@ -66,6 +94,18 @@ function AddProductForm() {
             <button type="button" onClick={resetForm}>Reset Form</button>
         </form>
     )
+}
+
+const styles = {
+    nameInputWrapper: {
+        fontSize: '1.5em',
+        fontWeight: 'bold',
+        display: 'flex',
+        marginTop: '10px',
+        height: '52px !important', 
+        resize: 'none', 
+        border: 'none', 
+    }
 }
 
 export default AddProductForm;
