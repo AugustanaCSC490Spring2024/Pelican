@@ -1,43 +1,33 @@
-import logo from './logo.svg';
-import { useState } from 'react';
-import { GoogleLogin } from '@react-oauth/google';
-import { GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
+import { useState, useEffect } from 'react';
+import { onAuthStateChanged } from 'firebase/auth'; // Track authentication state
+import { useNavigate } from 'react-router-dom';
 import { auth } from './firebase';
 
 function App() {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate(); // Navigation hook
 
-  const handleGoogleLogin = async (credentialResponse) => {
-    try {
-      const idToken = credentialResponse.credential;
+  useEffect(() => {
+    // Track authentication state
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user); // Set the authenticated user
+      } else {
+        navigate('/'); // Redirect to sign-in if no user is authenticated
+      }
+    });
 
-      const credential = GoogleAuthProvider.credential(idToken);
+    return () => unsubscribe(); // Clean up the subscription on component unmount
+  }, [navigate]); // Dependency array includes navigate
 
-      const userCredential = await signInWithCredential(auth, credential);
-
-      setUser(userCredential.user);
-      console.log('User signed in:', userCredential.user);
-    } catch (error) {
-      console.error('Firebase sign-in error:', error);
-    }
-  };
+  if (!user) {
+    return null; // Return null while checking authentication state
+  }
 
   return (
-    <div className="App">
-      <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-        {user ? (
-          <p>Welcome, {user.displayName}!</p>
-        ) : (
-          <>
-            <p>Google Authentication.</p>
-            <GoogleLogin
-              onSuccess={handleGoogleLogin}
-              onError={() => console.log('Login Failed')}
-            />
-          </>
-        )}
-      </header>
+    <div>
+      <h1>Welcome, {user.displayName}!</h1>
+      {/* Additional content for authenticated users */}
     </div>
   );
 }
