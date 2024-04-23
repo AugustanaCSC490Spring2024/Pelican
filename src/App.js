@@ -29,8 +29,7 @@ function App() {
         <ul className='nav-links'>
           <li className='link-item'><a href=''>Home</a></li>
           <li className='link-item'><a href=''>Chat</a></li>
-          <li className='link-item post-btn'><a href=''>Post</a></li>
-          <li className='link-item post-btn'><a href='' onClick={handleShowForm}>Add Product</a></li>
+          <li className='link-item post-btn'><a href='' onClick={handleShowForm}>Post</a></li>
         </ul>
       </div>
       {/* <ProductView/> */}

@@ -1,28 +1,21 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import { db } from "../../data/firebase";
+// code reference https://youtu.be/sWVgMcz8Q44?si=nfaJRBTvmaHyHq3L
 
 import "./SearchBar.css";
+import { collection } from "@firebase/firestore";
 
 export const SearchBar = ({ setResults }) => {
   const [input, setInput] = useState("");
 
-  const fetchData = (value) => {
-    fetch("https://pelican-marketplace-app-default-rtdb.firebaseio.com/.json")
-      .then((response) => response.json())
-      .then((json) => {
-        const results = (json) => {
-          return (
-            json
-          );
-        };
-        setResults(results);
-      });
-  };
+  
+  const products = collection(db, "products")
   // TODO: Link this up to autocomplete results once data is in FB
 
   const handleChange = (value) => {
     setInput(value);
-    fetchData(value);
+    setResults(products)
   };
 
   return (
