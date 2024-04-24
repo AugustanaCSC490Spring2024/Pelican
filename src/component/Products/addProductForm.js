@@ -8,6 +8,7 @@ import {
     listAll,
     list,
   } from "firebase/storage";
+import defaultImage from '../../assets/icon.png';
 
 
 function AddProductForm() {
@@ -25,7 +26,7 @@ function AddProductForm() {
     const fileInput = useRef(null);
 
     const [message, setMessage] = useState("");
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState(defaultImage);
 
     const handleChange = (e) => {
         setProduct({
@@ -47,13 +48,18 @@ function AddProductForm() {
     };
 
     const saveImage = async () => {
-        if (image === null) return;
-        const imageRef = ref(storage, `images/${product.id}`);
-        const snapshot = await uploadBytes(imageRef, image);
-        console.log('Uploaded image sucessfully!');
-        const url = await getDownloadURL(snapshot.ref);
-        console.log('File available at', url);
-        return url;
+        // if (image === null) return defaultImage;
+        if (image !== defaultImage) {
+            const imageRef = ref(storage, `images/${product.id}`);
+            const snapshot = await uploadBytes(imageRef, image);
+            console.log('Uploaded image successfully!');
+            const url = await getDownloadURL(snapshot.ref);
+            console.log('File available at', url);
+            return url;
+        } else {
+            return defaultImage;
+        }
+        
     }
 
     const handleSubmit = async (e) => {
@@ -85,7 +91,8 @@ function AddProductForm() {
             location: '',
             isShoppingList: false,
         });
-        fileInput.current.value = '';
+        // fileInput.current.value = '';
+        setImage(defaultImage);
     }
 
     return (

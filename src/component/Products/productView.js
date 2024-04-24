@@ -9,7 +9,7 @@ const ProductView = () => {
         <div style = {styles.post}>
             {products.map((product, index) => (
                 <div key={index} style={styles.postItem}>
-                    <img alt="img" src={logo} style={styles.prdImg}/>
+                    <img alt="img" src={product.image} style={styles.prdImg}/>
                     <div style={{textAlign: 'center'}}>
                         <h2 style={styles.prdInfoH2}> {product.name} - ${Number(product.price).toLocaleString()} </h2>
                         <p style ={styles.prdUser}> @{product.user} </p>
@@ -32,6 +32,8 @@ const styles = {
     },
     prdImg: {
         width: '100%',
+        height: '500px',  
+        objectFit: 'cover',
     },
     prdUser: {
         fontSize: '1.5em',
