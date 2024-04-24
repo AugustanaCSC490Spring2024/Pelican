@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { db, storage } from '../../data/firebase';
 import { collection, addDoc } from 'firebase/firestore'; 
 import {
     ref,
     uploadBytes,
     getDownloadURL,
-    listAll,
-    list,
-  } from "firebase/storage";
+} from "firebase/storage";
 import defaultImage from '../../assets/icon.png';
 
 
