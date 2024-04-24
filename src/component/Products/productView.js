@@ -7,8 +7,8 @@ const ProductView = () => {
     const products = useProducts();
     return (
         <div style = {styles.post}>
-            {products.map((product) => (
-                <div key={product.key} style={styles.postItem}>
+            {products.map((product, index) => (
+                <div key={index} style={styles.postItem}>
                     <img alt="img" src={logo} style={styles.prdImg}/>
                     <div style={{textAlign: 'center'}}>
                         <h2 style={styles.prdInfoH2}> {product.name} - ${Number(product.price).toLocaleString()} </h2>

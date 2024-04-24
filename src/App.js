@@ -40,9 +40,9 @@ function App() {
   return (
     <div className="App">
       <div className='navbar'>
-        <div>
+        {/* <div>
           <h1>Welcome, {user.displayName}!</h1>
-        </div>
+        </div> */}
         <div style={{display: 'flex'}}>
           <img src={logoTrans} alt='logo' style={{width: '70px', height: '70px'}}></img>
           <h2>Pelican Marketplace</h2>

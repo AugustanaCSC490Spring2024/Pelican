@@ -1,6 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { db } from '../../data/firebase';
+import { db, storage } from '../../data/firebase';
 import { collection, addDoc } from 'firebase/firestore'; 
+import {
+    ref,
+    uploadBytes,
+    getDownloadURL,
+    listAll,
+    list,
+  } from "firebase/storage";
+
 
 function AddProductForm() {
     const [product, setProduct] = useState({
@@ -14,8 +22,10 @@ function AddProductForm() {
         location: '',
         isShoppingList: false,
     });
-    const [message, setMessage] = useState("");
     const fileInput = useRef(null);
+
+    const [message, setMessage] = useState("");
+    const [image, setImage] = useState(null);
 
     const handleChange = (e) => {
         setProduct({
@@ -32,8 +42,18 @@ function AddProductForm() {
         });
     }
 
-    const saveImage = async (image) => {
+    const handleImageUpload = (e) => {
+        setImage(e.target.files[0]);
+    };
 
+    const saveImage = async () => {
+        if (image === null) return;
+        const imageRef = ref(storage, `images/${product.id}`);
+        const snapshot = await uploadBytes(imageRef, image);
+        console.log('Uploaded image sucessfully!');
+        const url = await getDownloadURL(snapshot.ref);
+        console.log('File available at', url);
+        return url;
     }
 
     const handleSubmit = async (e) => {
@@ -41,6 +61,8 @@ function AddProductForm() {
         product.id = Date.now();
         console.log(product);
         try {
+            const imageUrl = await saveImage();
+            product.image = imageUrl;
             const docRef = await addDoc(collection(db, "products"), product);
             console.log("Document written with ID: ", docRef.id);
             setMessage("Product added successfully");
@@ -87,7 +109,7 @@ function AddProductForm() {
                 <option value="available">Available</option>
                 <option value="unavailable">Unavailable</option>
             </select>
-            <input type="file" name="image" ref={fileInput} onChange={handleImageChange} />
+            <input type="file" name="image" ref={fileInput} onChange={handleImageUpload} />
             <input type="text" name="category" placeholder="Category" value={product.category} onChange={handleChange} />
             <input type="text" name="location" placeholder="Location" value={product.location} onChange={handleChange} />
             <button type="submit">Add Product</button>
