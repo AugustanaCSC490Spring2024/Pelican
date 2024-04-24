@@ -3,6 +3,6 @@ import { AddProductForm } from './addProductForm'
 
 export default function addProductView() {
   return (
-    <AddProductForm />
+      <AddProductForm />
     )
 }

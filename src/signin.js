@@ -11,7 +11,7 @@ function SignIn() {
             const idToken = credentialResponse.credential;
             const credential = GoogleAuthProvider.credential(idToken);
             await signInWithCredential(auth, credential);
-            navigate('/app');
+            navigate('/home');
         } catch (error) {
             console.error('Firebase sign-in error:', error);
         }

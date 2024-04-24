@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import Home from '../src/interfaces/Home'
+import Post from '../src/interfaces/Post';
+import Chat from '../src/interfaces/Chat';
 import SignIn from './signin'; // Import the new SignIn component
 import reportWebVitals from './reportWebVitals';
 import { GoogleOAuthProvider } from '@react-oauth/google';
@@ -14,7 +17,10 @@ root.render(
       <Router>
         <Routes>
           <Route path="/" element={<SignIn />} /> {/* Default route is SignIn */}
-          <Route path="/app" element={<App />} /> {/* App route */}
+          <Route path="/app/*" element={<App />} /> {/* App route */}
+          <Route path="/home" element={<Home />} />
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/post" element={<Post />} />
         </Routes>
       </Router>
     </GoogleOAuthProvider>
