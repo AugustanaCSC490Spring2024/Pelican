@@ -1,8 +1,6 @@
 import '../App.css';
 import React, { useEffect, useState } from 'react';
-import ProductView from '../component/Products/productView';
 import logoTrans from '../assets/logo-trans.png';
-import AddProductForm from '../component/Products/addProductForm';
 import { db, auth } from '../data/firebase.js'
 import SearchComponent from '../component/SearchComponents/SearchBar.js';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -56,6 +54,15 @@ const Navigation = () => {
             <li className='link-item post-btn'><a href='/post'>Post</a></li>
           </ul>          
         </div>
+        {/* <div className = "search-bar-container">
+          <SearchComponent db={ db } />
+        </div>
+        <ul className='nav-links'>
+          <li className='link-item'><a href='/home'>Home</a></li>
+          <li className='link-item'><a href='/chat'>Chat</a></li>
+          <li className='link-item post-btn'><a href='/post'>Post</a></li>
+        </ul> */}
+      
       </div>
   );
 }
