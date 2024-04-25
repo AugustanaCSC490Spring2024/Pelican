@@ -108,7 +108,7 @@ function AddProductForm() {
                     value={product.name} 
                     onChange={handleChange} 
                 />
-                <h3 style={styles.miniTitle}>Price</h3>
+                <h3 style={styles.miniTitle}>Price ($)</h3>
                 <input type="text" name="price" placeholder="Price" value={product.price} onChange={handleChange} style={styles.nameInputWrapper}/>
                 {/* Try to get seller's id from authentication */}
                 {/* <input type="text" name="seller" placeholder="Seller" value={product.seller} onChange={handleChange} /> */}
