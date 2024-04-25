@@ -17,8 +17,8 @@ const firebaseConfig = {
   storageBucket: "pelican-marketplace-app.appspot.com",
   messagingSenderId: "354512485882",
   appId: "1:354512485882:web:da77226e539ab62a5cf843",
-  measurementId: "G-KBY11FZQVF"
-};
+  measurementId: "G-KBY11FZQVF",
+}
 
 //apiKey: AIzaSyCFE3jK_6IA6rr7F9BDSsYtSP0BziYBtDM
 
