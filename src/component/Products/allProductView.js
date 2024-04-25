@@ -3,7 +3,7 @@ import logo from '../../assets/icon.png'
 import React from 'react';
 
 
-const ProductView = () => {
+const AllProductView = () => {
     const products = useProducts();
     return (
         <div style = {styles.post}>
@@ -45,4 +45,4 @@ const styles = {
     }
 };
 
-export default ProductView;
+export default AllProductView;

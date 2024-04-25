@@ -1,6 +1,6 @@
 import '../App.css';
 import React, { useEffect, useState } from 'react';
-import ProductView from '../component/Products/productView';
+import ProductView from '../component/Products/allProductView.js';
 import logoTrans from '../assets/logo-trans.png';
 import AddProductForm from '../component/Products/addProductForm';
 import { db, auth } from '../data/firebase.js'
@@ -13,6 +13,10 @@ const Navigation = () => {
   // const [results, setResults] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [user, setUser] = useState(null);
+
+  if (user) {
+    console.log('User object:', user);
+  }
 
   const navigate = useNavigate();
 

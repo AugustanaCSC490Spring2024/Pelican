@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { db, storage } from '../../data/firebase';
+import { db, storage, auth } from '../../data/firebase';
 import { collection, addDoc } from 'firebase/firestore'; 
 import {
     ref,
@@ -13,13 +13,14 @@ function AddProductForm() {
     const [product, setProduct] = useState({
         name: '',
         price: '',
-        seller: '',
+        // seller: '',
         description: '',
         status: 'available',
         image: '',
         category: '',
         location: '',
         isShoppingList: false,
+        user: '',
     });
     const fileInput = useRef(null);
 
@@ -63,6 +64,7 @@ function AddProductForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         product.id = Date.now();
+        product.user = auth.currentUser.displayName;
         console.log(product);
         try {
             const imageUrl = await saveImage();

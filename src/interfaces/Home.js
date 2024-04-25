@@ -3,7 +3,7 @@ import '../App.css';
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navigation from './Navigation';
-import ProductView from '../component/Products/productView';
+import ProductView from '../component/Products/allProductView';
 
 const Home = () => {
 
