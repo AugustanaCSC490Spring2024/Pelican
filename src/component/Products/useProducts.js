@@ -4,8 +4,10 @@ import { collection, getDocs } from "firebase/firestore";
 
 const readProducts = async () => {
     try {
-        const snapshot = await getDocs(collection(db, 'products'));
-        return snapshot.docs.map(doc => doc.data());
+        const productRef = collection(db, 'products');
+        const snapshot = await getDocs(productRef);
+        const products = snapshot.docs.map(product => ({ ...product.data(), key: product.id }));
+        return products;
     } catch (err) {
         console.error(err);
     }

@@ -9,8 +9,8 @@ const Home = () => {
 
     return (
         <div className="App">
-            <Navigation></Navigation>
-            <ProductView></ProductView>
+            <Navigation /> 
+            <ProductView /> 
 
     </div>
     );

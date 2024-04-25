@@ -9,6 +9,8 @@ import SignIn from './signin';
 import reportWebVitals from './reportWebVitals';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import EachProductView from './component/Products/eachProductView';
+import AllProductView from './component/Products/allProductView';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,10 +19,11 @@ root.render(
       <Router>
         <Routes>
           <Route path="/" element={<SignIn />} /> 
-          <Route path="/app/*" element={<App />} /> 
+          <Route exact path="/app/*" element={<App />} /> 
           <Route path="/home" element={<Home />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/post" element={<Post />} />
+          <Route path="/product/:productId" component={EachProductView} />
         </Routes>
       </Router>
     </GoogleOAuthProvider>

@@ -7,7 +7,7 @@ const Chat = () => {
 
     return (
         <div className="App">
-            <Navigation></Navigation>
+            <Navigation />
             <h1>Chatting Page</h1>
         </div>
     );

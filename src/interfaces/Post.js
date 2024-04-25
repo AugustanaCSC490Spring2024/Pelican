@@ -8,8 +8,8 @@ const Post = () => {
 
     return (
         <div className='App'>
-            <Navigation></Navigation>
-            <AddProductForm></AddProductForm>
+            <Navigation />
+            <AddProductForm />
         </div>
 
     );
