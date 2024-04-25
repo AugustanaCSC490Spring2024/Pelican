@@ -58,6 +58,7 @@ const Navigation = () => {
           <li className='link-item'><a href='/chat'>Chat</a></li>
           <li className='link-item post-btn'><a href='/post'>Post</a></li>
         </ul>
+        
       </div>
   );
 }
