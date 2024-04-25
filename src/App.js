@@ -15,18 +15,6 @@ import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-ro
 
 function App() {
   return (
-    // <Router>
-    //   <Switch>
-    //     <Route exact path="/" component={Home} />
-    //     <Route path="/chat" component={Chat} />
-    //     <Route path="/post" component={Post} />
-    //   </Switch>
-    // </Router>
-    // <Routes>
-    //   <Route path="/" element={Home} />
-    //   <Route path="/chat" element={Chat} />
-    //   <Route path="/post" element={Post} />
-    // </Routes>
     <div></div>
   );
 }
