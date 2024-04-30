@@ -41,7 +41,7 @@ const Navigation = () => {
       <div className='navbar'>
         <h3>Welcome, {user.displayName}!</h3>
           <div style={{display: 'flex', alignItems: 'center'}}>
-            <img src={logoTrans} alt='logo' style={{width: '70px', height: '70px'}}></img>
+          <img src={logoTrans} alt='logo' style={{width: '70px', height: '70px'}}></img>
             <h2 style={{ fontWeight: 'bold' }}>Pelican Marketplace</h2>
           </div>
         <div style={styles.box}>
@@ -53,16 +53,7 @@ const Navigation = () => {
             <li className='link-item'><a href='/chat'>Chat</a></li>
             <li className='link-item post-btn'><a href='/post'>Post</a></li>
           </ul>          
-        </div>
-        {/* <div className = "search-bar-container">
-          <SearchComponent db={ db } />
-        </div>
-        <ul className='nav-links'>
-          <li className='link-item'><a href='/home'>Home</a></li>
-          <li className='link-item'><a href='/chat'>Chat</a></li>
-          <li className='link-item post-btn'><a href='/post'>Post</a></li>
-        </ul> */}
-      
+        </div> 
       </div>
   );
 }
@@ -72,11 +63,6 @@ const styles = {
     display: 'flex',
     alignItems: 'center'
   }
-}
-
-{/* <ProductView/> */}
-{/* <AddProductForm /> */}
-{/* Put here temporarily - will modify where to put later */}
-{/* {showForm ? <AddProductForm /> : <ProductView />} */}
+} 
 
 export default Navigation;
