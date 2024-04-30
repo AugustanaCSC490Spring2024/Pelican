@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { db, storage } from '../../data/firebase';
+import { db, storage, auth } from '../../data/firebase';
 import { collection, addDoc } from 'firebase/firestore'; 
 import {
     ref,
@@ -13,13 +13,14 @@ function AddProductForm() {
     const [product, setProduct] = useState({
         name: '',
         price: '',
-        seller: '',
+        // seller: '',
         description: '',
         status: 'available',
         image: '',
         category: '',
         location: '',
         isShoppingList: false,
+        user: '',
     });
     const fileInput = useRef(null);
 
@@ -63,6 +64,7 @@ function AddProductForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         product.id = Date.now();
+        product.user = auth.currentUser.displayName;
         console.log(product);
         try {
             const imageUrl = await saveImage();
@@ -94,8 +96,10 @@ function AddProductForm() {
     }
 
     return (
-        <form onSubmit={handleSubmit} style={{ margin: '20px', padding: '20px' }}>
-            <h2>Add Product</h2>
+        <div style={styles.contatiner}>
+            <form onSubmit={handleSubmit} style={{ margin: '20px', padding: '20px' }}>
+                <h2 style={styles.title}>Post Your Product</h2>
+                <h3 style={styles.miniTitle}>Product Name</h3>
                 <input 
                     type="text" 
                     name="name" 
@@ -106,32 +110,76 @@ function AddProductForm() {
                     value={product.name} 
                     onChange={handleChange} 
                 />
-            <input type="text" name="price" placeholder="Price" value={product.price} onChange={handleChange} />
-            {/* Try to get seller's id from authentication */}
-            {/* <input type="text" name="seller" placeholder="Seller" value={product.seller} onChange={handleChange} /> */}
-            <input type="text" name="description" placeholder="Description" value={product.description} onChange={handleChange} />
-            <select name="status" value={product.status} onChange={handleChange}>
-                <option value="available">Available</option>
-                <option value="unavailable">Unavailable</option>
-            </select>
-            <input type="file" name="image" ref={fileInput} onChange={handleImageUpload} />
-            <input type="text" name="category" placeholder="Category" value={product.category} onChange={handleChange} />
-            <input type="text" name="location" placeholder="Location" value={product.location} onChange={handleChange} />
-            <button type="submit">Add Product</button>
-            <button type="button" onClick={resetForm}>Reset Form</button>
-        </form>
+                <h3 style={styles.miniTitle}>Price ($)</h3>
+                <input type="text" name="price" placeholder="Price" value={product.price} onChange={handleChange} style={styles.nameInputWrapper}/>
+                {/* Try to get seller's id from authentication */}
+                {/* <input type="text" name="seller" placeholder="Seller" value={product.seller} onChange={handleChange} /> */}
+                <h3 style={styles.miniTitle}>Product Description</h3>
+                <textarea name="description" placeholder="Description" value={product.description} onChange={handleChange} style={styles.inputBox} cols="40" rows="5"></textarea>
+                {/* <input type="text" name="description" placeholder="Description" value={product.description} onChange={handleChange} style={styles.nameInputWrapper}/> */}
+                {/* <select name="status" value={product.status} onChange={handleChange}>
+                    <option value="available">Available</option>
+                    <option value="unavailable">Unavailable</option>
+                </select> */}
+                <h3 style={styles.miniTitle}>Image</h3>
+                <input type="file" name="image" ref={fileInput} onChange={handleImageUpload} style={styles.nameInputWrapper}/>
+                <h3 style={styles.miniTitle}>Category</h3>
+                {/* <input type="text" name="category" placeholder="Category" value={product.category} onChange={handleChange} style={styles.nameInputWrapper}/> */}
+                <select name="category" placeholder="Category" value={product.category} onChange={handleChange} style={styles.nameInputWrapper}>
+                    <option>Electronics</option>
+                    <option>Furnitures</option>
+                    <option>School Supplies</option>
+                    <option>Apparells</option>
+                    <option>Miscellaneous</option>
+                </select>
+                {/* <h3 style={styles.miniTitle}>Meet-up Location</h3>
+                <input type="text" name="location" placeholder="Location" value={product.location} onChange={handleChange} style={styles.nameInputWrapper}/> */}
+                <div>
+                    <button style={styles.btn} type="submit">Add Product</button>
+                    <button style={styles.btn} type="button" onClick={resetForm}>Reset Form</button>
+                </div>
+            </form>
+        </div>
     )
 }
 
 const styles = {
     nameInputWrapper: {
-        fontSize: '1.5em',
+        fontSize: '1em',
         fontWeight: 'bold',
         display: 'flex',
         marginTop: '10px',
         height: '52px !important', 
         resize: 'none', 
-        border: 'none', 
+        border: 'none',
+        marginBottom: '15px',
+        backgroundColor: '#ddd',
+        padding: '3px 5px',
+        borderRadius: '10px',
+        width: '250px'
+    },
+    inputBox: {
+        backgroundColor: '#ddd',
+        padding: '3px 5px',
+        borderRadius: '10px',
+        fontWeight: 'bold'
+    },
+    title: {
+        fontSize: '3em',
+        fontWeight: 'bold'
+    },
+    btn: {
+        padding: '10px 150px',
+        color: 'white',
+        backgroundColor: 'black',
+        borderRadius: '15px',
+        marginRight: '15px',
+        fontWeight: 'bold',
+    },
+    miniTitle: {
+        fontSize:'1.5em',
+        marginBottom: '10px',
+        fontWeight: 'bold'
     }
 }
 

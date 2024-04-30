@@ -1,8 +1,6 @@
 import '../App.css';
 import React, { useEffect, useState } from 'react';
-import ProductView from '../component/Products/productView';
 import logoTrans from '../assets/logo-trans.png';
-import AddProductForm from '../component/Products/addProductForm';
 import { db, auth } from '../data/firebase.js'
 import SearchComponent from '../component/Search/SearchBar.js';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -42,20 +40,38 @@ const Navigation = () => {
   return (
       <div className='navbar'>
         <h3>Welcome, {user.displayName}!</h3>
-        <div style={{display: 'flex'}}>
-          <img src={logoTrans} alt='logo' style={{width: '70px', height: '70px'}}></img>
-          <h2>Pelican Marketplace</h2>
+          <div style={{display: 'flex', alignItems: 'center'}}>
+            <img src={logoTrans} alt='logo' style={{width: '70px', height: '70px'}}></img>
+            <h2 style={{ fontWeight: 'bold' }}>Pelican Marketplace</h2>
+          </div>
+        <div style={styles.box}>
+          <div className = "search-bar-container">
+            <SearchComponent db={ db } />
+          </div>
+          <ul className='nav-links'>
+            <li className='link-item'><a href='/home'>Home</a></li>
+            <li className='link-item'><a href='/chat'>Chat</a></li>
+            <li className='link-item post-btn'><a href='/post'>Post</a></li>
+          </ul>          
         </div>
-        <div className = 'search-bar-container'>
-          <SearchComponent />
+        {/* <div className = "search-bar-container">
+          <SearchComponent db={ db } />
         </div>
         <ul className='nav-links'>
           <li className='link-item'><a href='/home'>Home</a></li>
           <li className='link-item'><a href='/chat'>Chat</a></li>
           <li className='link-item post-btn'><a href='/post'>Post</a></li>
-        </ul>
+        </ul> */}
+      
       </div>
   );
+}
+
+const styles = {
+  box: {
+    display: 'flex',
+    alignItems: 'center'
+  }
 }
 
 {/* <ProductView/> */}
