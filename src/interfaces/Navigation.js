@@ -45,10 +45,8 @@ const Navigation = () => {
             <h2 style={{ fontWeight: 'bold' }}>Pelican Marketplace</h2>
           </div>
         <div style={styles.box}>
-          <div className = "search-bar-container">
-            <SearchComponent db={ db } />
-          </div>
           <ul className='nav-links'>
+            <li className='link-item'><SearchComponent db={ db } /></li>
             <li className='link-item'><a href='/home'>Home</a></li>
             <li className='link-item'><a href='/chat'>Chat</a></li>
             <li className='link-item post-btn'><a href='/post'>Post</a></li>
