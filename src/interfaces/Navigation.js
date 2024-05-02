@@ -1,14 +1,13 @@
 import '../App.css';
 import React, { useEffect, useState } from 'react';
 import logoTrans from '../assets/logo-trans.png';
-import { db, auth } from '../data/firebase.js'
-import SearchComponent from '../component/Search/SearchBar.js';
+import { auth } from '../data/firebase.js'
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-
+import { db } from "../data/firebase";
+import SearchComponent from '../component/Search/SearchBar';
 
 const Navigation = () => {
-  const [showForm, setShowForm] = useState(false);
   const [user, setUser] = useState(null);
 
   const navigate = useNavigate();
@@ -40,41 +39,33 @@ const Navigation = () => {
     return null;
   }
 
-  const handleShowForm = (e) => {
-    e.preventDefault();
-    setShowForm(true);
-  };
-
   return (
     <div className='navbar'>
-      <h3>Welcome, {user.displayName}!</h3>
-      <button className='link-item post-btn' onClick={handleLogout}>Logout</button>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={styles.logoCont}>
         <img src={logoTrans} alt='logo' style={{ width: '70px', height: '70px' }}></img>
         <h2 style={{ fontWeight: 'bold' }}>Pelican Marketplace</h2>
       </div>
-      <div style={styles.box}>
+      <div style={styles.menuCont}>
         <ul className='nav-links'>
           <li className='link-item'><SearchComponent db={db} /></li>
           <li className='link-item'><a href='/home'>Home</a></li>
           <li className='link-item'><a href='/chat'>Chat</a></li>
           <li className='link-item post-btn'><a href='/post'>Post</a></li>
+          <li className='link-item post-btn'><button onClick={handleLogout}>Logout</button></li>
         </ul>
       </div>
+      {/* <div style={styles.userCont}>
+        <h3>Welcome, {user.displayName}!</h3>
+      </div> */}
     </div>
   );
 }
 
 const styles = {
-  box: {
+  logoCont: {
     display: 'flex',
     alignItems: 'center'
   }
 }
-
-{/* <ProductView/> */ }
-{/* <AddProductForm /> */ }
-{/* Put here temporarily - will modify where to put later */ }
-{/* {showForm ? <AddProductForm /> : <ProductView />} */ }
 
 export default Navigation;

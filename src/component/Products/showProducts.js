@@ -1,9 +1,7 @@
-import useProducts from "./useProducts";
+import { useNavigate } from 'react-router-dom';
 import React from 'react';
-import { Link, useNavigate, useHistory } from 'react-router-dom';
 
-const AllProductView = () => {
-    const products = useProducts();
+const ShowProducts = ({ products }) => {
     const navigate = useNavigate();
 
     const handleProductClick = (productId) => {
@@ -13,7 +11,6 @@ const AllProductView = () => {
     return (
         <div style = {styles.post}>
             {products.map((product) => ( 
-                // <Link to={`/product/${product.id}`} key={index}>
                     <div key={product.key} product={product} style={styles.postItem} onClick={() => handleProductClick(product.key)}>
                         <img alt="img" src={product.image} style={styles.prdImg}/>
                         <div style={{textAlign: 'center'}}>
@@ -21,7 +18,6 @@ const AllProductView = () => {
                             <p style ={styles.prdUser}> @{product.user} </p>
                         </div>
                     </div>
-                // </Link>
             ))}
         </div>
     );
@@ -32,6 +28,7 @@ const styles = {
     post: {
         display: 'grid',
         gridTemplateColumns: '2fr 2fr 2fr',
+        margin: 20,
     },
     postItem: {
         margin: '5px',
@@ -52,4 +49,4 @@ const styles = {
     }
 };
 
-export default AllProductView;
+export default ShowProducts;

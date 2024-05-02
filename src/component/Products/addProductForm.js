@@ -144,6 +144,9 @@ function AddProductForm() {
 }
 
 const styles = {
+    container: {
+        paddingLeft: '100px'
+    },
     nameInputWrapper: {
         fontSize: '1em',
         fontWeight: 'bold',
