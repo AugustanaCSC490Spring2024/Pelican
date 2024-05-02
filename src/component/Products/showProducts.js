@@ -11,7 +11,6 @@ const ShowProducts = ({ products }) => {
     return (
         <div style = {styles.post}>
             {products.map((product) => ( 
-                // <Link to={`/product/${product.id}`} key={index}>
                     <div key={product.key} product={product} style={styles.postItem} onClick={() => handleProductClick(product.key)}>
                         <img alt="img" src={product.image} style={styles.prdImg}/>
                         <div style={{textAlign: 'center'}}>
@@ -19,7 +18,6 @@ const ShowProducts = ({ products }) => {
                             <p style ={styles.prdUser}> @{product.user} </p>
                         </div>
                     </div>
-                // </Link>
             ))}
         </div>
     );
