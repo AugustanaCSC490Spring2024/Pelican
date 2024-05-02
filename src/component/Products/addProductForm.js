@@ -137,7 +137,7 @@ function AddProductForm() {
                 </div>
 
                 <div className="wave-group">
-                    <input required type="text" className="input" name="price" 
+                    <input required type="number" className="input" name="price" 
                     value={product.price} 
                     onChange={handleChange} />
                     <span className="bar"></span>
@@ -163,7 +163,7 @@ function AddProductForm() {
                 <h3 className='miniTitle'>Product Description</h3>
                 <textarea 
                     name="description" 
-                    placeholder="Description" 
+                    placeholder="Type your product details..." 
                     value={product.description} 
                     onChange={handleChange} 
                     cols="40" 
@@ -193,8 +193,8 @@ function AddProductForm() {
                     <option>Miscellaneous</option>
                 </select>
                 <div>
-                    <button className='btn-12' type="submit"><span>Add Product</span></button>
-                    <button className='btn-12' type="button" onClick={resetForm}><span>Reset Form</span></button>
+                    <button className='btn-12' type="submit" style={{ background: 'black' }}><span>Add Product</span></button>
+                    <button className='btn-12' type="button" style={{ background: 'black' }} onClick={resetForm}><span>Reset Form</span></button>
                 </div>
             </form>
         </div>

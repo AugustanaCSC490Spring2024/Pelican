@@ -10,14 +10,16 @@
     resize: none;
     border: none;
     margin-bottom: 15px;
-    background-color: #ddd;
-    padding: 3px 5px;
-    border-radius: 10px;
+    /* background-color: #ddd; */
+    padding: 5px 0;
+    /* border-radius: 10px; */
+    border-bottom: 1px solid #000;
 }
 .inputBox {
-    background-color: #ddd;
+    /* background-color: #ddd; */
     padding: 3px 5px;
     border-radius: 10px;
+    border: 1px solid black;
     font-weight: bold;
 }
 .title {
@@ -83,6 +85,7 @@
   overflow: hidden;
   padding: 0.8rem 3rem;
   position: relative;
+  background: black;
 }
 
 .btn-12 span {
@@ -126,7 +129,6 @@
 .btn-12:hover:before {
   --progress: 0;
 }
-
 
 
 
