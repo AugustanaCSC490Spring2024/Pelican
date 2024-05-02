@@ -97,7 +97,7 @@ function AddProductForm() {
 
     return (
         <div style={styles.contatiner}>
-            <form onSubmit={handleSubmit} style={{ margin: '20px', padding: '20px' }}>
+            <form onSubmit={handleSubmit} style={styles.postForm}>
                 <h2 style={styles.title}>Post Your Product</h2>
                 <h3 style={styles.miniTitle}>Product Name</h3>
                 <input 
@@ -111,29 +111,46 @@ function AddProductForm() {
                     onChange={handleChange} 
                 />
                 <h3 style={styles.miniTitle}>Price ($)</h3>
-                <input type="text" name="price" placeholder="Price" value={product.price} onChange={handleChange} style={styles.nameInputWrapper}/>
-                {/* Try to get seller's id from authentication */}
-                {/* <input type="text" name="seller" placeholder="Seller" value={product.seller} onChange={handleChange} /> */}
+                <input 
+                    type="text" 
+                    name="price" 
+                    placeholder="Price" 
+                    value={product.price} 
+                    onChange={handleChange} 
+                    style={styles.nameInputWrapper}
+                />
                 <h3 style={styles.miniTitle}>Product Description</h3>
-                <textarea name="description" placeholder="Description" value={product.description} onChange={handleChange} style={styles.inputBox} cols="40" rows="5"></textarea>
-                {/* <input type="text" name="description" placeholder="Description" value={product.description} onChange={handleChange} style={styles.nameInputWrapper}/> */}
-                {/* <select name="status" value={product.status} onChange={handleChange}>
-                    <option value="available">Available</option>
-                    <option value="unavailable">Unavailable</option>
-                </select> */}
+                <textarea 
+                    name="description" 
+                    placeholder="Description" 
+                    value={product.description} 
+                    onChange={handleChange} 
+                    style={styles.inputBox} 
+                    cols="40" 
+                    rows="5" 
+                />
                 <h3 style={styles.miniTitle}>Image</h3>
-                <input type="file" name="image" ref={fileInput} onChange={handleImageUpload} style={styles.nameInputWrapper}/>
+                <input 
+                    type="file" 
+                    name="image" 
+                    ref={fileInput} 
+                    onChange={handleImageUpload} 
+                    style={styles.nameInputWrapper}
+                />
                 <h3 style={styles.miniTitle}>Category</h3>
-                {/* <input type="text" name="category" placeholder="Category" value={product.category} onChange={handleChange} style={styles.nameInputWrapper}/> */}
-                <select name="category" placeholder="Category" value={product.category} onChange={handleChange} style={styles.nameInputWrapper}>
+                <select 
+                    name="category" 
+                    placeholder="Category" 
+                    value={product.category} 
+                    onChange={handleChange} 
+                    style={styles.nameInputWrapper}
+                >
                     <option>Electronics</option>
                     <option>Furnitures</option>
                     <option>School Supplies</option>
                     <option>Apparells</option>
                     <option>Miscellaneous</option>
                 </select>
-                {/* <h3 style={styles.miniTitle}>Meet-up Location</h3>
-                <input type="text" name="location" placeholder="Location" value={product.location} onChange={handleChange} style={styles.nameInputWrapper}/> */}
                 <div>
                     <button style={styles.btn} type="submit">Add Product</button>
                     <button style={styles.btn} type="button" onClick={resetForm}>Reset Form</button>
@@ -144,6 +161,10 @@ function AddProductForm() {
 }
 
 const styles = {
+    postForm : {
+        padding: '50px 500px',
+        // textAlign: 'center'
+    },
     nameInputWrapper: {
         fontSize: '1em',
         fontWeight: 'bold',
@@ -156,17 +177,19 @@ const styles = {
         backgroundColor: '#ddd',
         padding: '3px 5px',
         borderRadius: '10px',
-        width: '250px'
+        width: '50%'
     },
     inputBox: {
         backgroundColor: '#ddd',
         padding: '3px 5px',
         borderRadius: '10px',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        width: '50%'
     },
     title: {
         fontSize: '3em',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginBottom: '50px'
     },
     btn: {
         padding: '10px 150px',

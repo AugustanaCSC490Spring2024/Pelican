@@ -39,7 +39,7 @@ const SearchProducts = () => {
     
     return (
         <div>
-            <SearchComponent searchQuery={searchQuery} handleChange={handleChange} />
+            {/* <SearchComponent searchQuery={searchQuery} handleChange={handleChange} /> */}
             <ShowProducts products={products} />
         </div>
     );
