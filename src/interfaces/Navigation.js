@@ -2,13 +2,12 @@ import '../App.css';
 import React, { useEffect, useState } from 'react';
 import logoTrans from '../assets/logo-trans.png';
 import { db, auth } from '../data/firebase.js'
-import SearchComponent from '../component/SearchComponents/SearchBar.js';
-import { onAuthStateChanged } from 'firebase/auth';
+import SearchComponent from '../component/Search/SearchBar.js';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 
 const Navigation = () => {
-  // const [results, setResults] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [user, setUser] = useState(null);
 
@@ -28,6 +27,15 @@ const Navigation = () => {
     return () => unsubscribe();
   }, [navigate]);
 
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate('/');
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
+
   if (!user) {
     return null;
   }
@@ -38,6 +46,7 @@ const Navigation = () => {
   };
 
   return (
+
       <div className='navbar'>
         <h3>Welcome, {user.displayName}!</h3>
           <div style={{display: 'flex', alignItems: 'center'}}>
@@ -65,9 +74,9 @@ const styles = {
   }
 }
 
-{/* <ProductView/> */}
-{/* <AddProductForm /> */}
-{/* Put here temporarily - will modify where to put later */}
-{/* {showForm ? <AddProductForm /> : <ProductView />} */}
+{/* <ProductView/> */ }
+{/* <AddProductForm /> */ }
+{/* Put here temporarily - will modify where to put later */ }
+{/* {showForm ? <AddProductForm /> : <ProductView />} */ }
 
 export default Navigation;
