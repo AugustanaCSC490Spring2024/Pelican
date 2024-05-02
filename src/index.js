@@ -19,7 +19,7 @@ root.render(
       <Router>
         <Routes>
           <Route path="/" element={<SignIn />} /> 
-          <Route exact path="/app/*" element={<App />} /> 
+          {/* <Route exact path="/app/*" element={<App />} />  */}
           <Route path="/home" element={<Home />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/post" element={<Post />} />

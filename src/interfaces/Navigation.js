@@ -54,15 +54,6 @@ const Navigation = () => {
             <li className='link-item post-btn'><a href='/post'>Post</a></li>
           </ul>          
         </div>
-        {/* <div className = "search-bar-container">
-          <SearchComponent db={ db } />
-        </div>
-        <ul className='nav-links'>
-          <li className='link-item'><a href='/home'>Home</a></li>
-          <li className='link-item'><a href='/chat'>Chat</a></li>
-          <li className='link-item post-btn'><a href='/post'>Post</a></li>
-        </ul> */}
-      
       </div>
   );
 }
