@@ -1,17 +1,13 @@
-import logo from '../assets/icon.png'
 import '../App.css';
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React from 'react';
 import Navigation from './Navigation';
-import ProductView from '../component/Products/allProductView';
+import SearchProducts from '../component/Products/SearchProducts.js';
 
 const Home = () => {
-
     return (
         <div className="App">
             <Navigation /> 
-            <ProductView /> 
-
+            <SearchProducts />
     </div>
     );
 }

@@ -10,7 +10,6 @@ import reportWebVitals from './reportWebVitals';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import EachProductView from './component/Products/eachProductView';
-import AllProductView from './component/Products/allProductView';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
