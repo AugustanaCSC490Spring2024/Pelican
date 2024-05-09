@@ -3,6 +3,7 @@ import { query, collection, where, getDocs } from "firebase/firestore";
 import { db } from "../../data/firebase";
 import SearchComponent from '../Search/SearchBar.js';
 import ShowProducts from './showProducts';
+import useProducts from './useProducts';
 
 const SearchProducts = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -17,19 +18,23 @@ const SearchProducts = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-            const q = query(collection(db, 'products'), where('lowercaseName', '>=', searchQuery.toLowerCase()), where('lowercaseName', '<=', searchQuery.toLowerCase() + '\uf8ff'));
-                
+            const productRef = collection(db, 'products');
+   
             // gets the documents from the firestore data based on the query
-            const querySnapshot = await getDocs(q);
+            const querySnapshot = await getDocs(productRef);
                 
             // Grabs the detailed data from the firestore documents
             const productsData = querySnapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data(),
             }));
+
+            const filteredProducts = productsData.filter(product =>
+                product.name.toLowerCase().includes(searchQuery.toLowerCase())
+            );
         
-            setProducts(productsData);
-            setShowDropdown(productsData.length > 0);
+            setProducts(filteredProducts);
+            setShowDropdown(filteredProducts.length > 0);
             } catch (error) {
                 console.error('Error searching products:', error);
             }
