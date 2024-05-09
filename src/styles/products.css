@@ -1,0 +1,41 @@
+.post {
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr;
+    margin: 20px;
+}
+.post-item {
+    margin: 5px;
+    border: 5px;
+}
+.prd-img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+.prd-des {
+    text-align: center;
+}
+.prd-title {
+    font-size: 2em;
+    margin: 10;
+}
+.prd-seller {
+    font-size: 1.5em;
+    margin: 10;
+}
+
+@media screen and (max-width: 1400px) {
+    .post {
+        grid-template-columns: 2fr 2fr;
+    }
+}   
+@media screen and (max-width: 900px) {
+    .post {
+        grid-template-columns: 2fr;
+    }
+}
+@media screen and (max-width: 675px) {
+    .prd-img {
+        height: auto;
+    }
+}

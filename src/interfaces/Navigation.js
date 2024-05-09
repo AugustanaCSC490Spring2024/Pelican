@@ -48,7 +48,7 @@ const Navigation = () => {
         </div>
         <div style={styles.menuCont}>
           <ul className='nav-links'>
-            <li className='link-item'><SearchComponent db={db}/></li>
+            {/* <li className='link-item'><SearchComponent db={db}/></li> */}
             <li className='link-item'><a href='/home'>Home</a></li>
             <li className='link-item'><a href='/chat'>Chat</a></li>
             <li className='link-item post-btn btn-space'><a href='/post'>Post</a></li>

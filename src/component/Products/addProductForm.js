@@ -201,50 +201,50 @@ function AddProductForm() {
     )
 }
 
-const styles = {
-    postForm : {
-        padding: '2% 25%',
-        // textAlign: 'center'
-    },
-    nameInputWrapper: {
-        fontSize: '1em',
-        fontWeight: 'bold',
-        display: 'flex',
-        marginTop: '10px',
-        height: '52px !important', 
-        resize: 'none', 
-        border: 'none',
-        marginBottom: '15px',
-        backgroundColor: '#ddd',
-        padding: '3px 5px',
-        borderRadius: '10px',
-        // width: '50%'
-    },
-    inputBox: {
-        backgroundColor: '#ddd',
-        padding: '3px 5px',
-        borderRadius: '10px',
-        fontWeight: 'bold',
-        // width: '50%'
-    },
-    title: {
-        fontSize: '3em',
-        fontWeight: 'bold',
-        marginBottom: '50px'
-    },
-    btn: {
-        padding: '10px 150px',
-        color: 'white',
-        backgroundColor: 'black',
-        borderRadius: '15px',
-        marginRight: '15px',
-        fontWeight: 'bold',
-    },
-    miniTitle: {
-        fontSize:'1.5em',
-        marginBottom: '10px',
-        fontWeight: 'bold'
-    }
-}
+// const styles = {
+//     postForm : {
+//         padding: '2% 25%',
+//         // textAlign: 'center'
+//     },
+//     nameInputWrapper: {
+//         fontSize: '1em',
+//         fontWeight: 'bold',
+//         display: 'flex',
+//         marginTop: '10px',
+//         height: '52px !important', 
+//         resize: 'none', 
+//         border: 'none',
+//         marginBottom: '15px',
+//         backgroundColor: '#ddd',
+//         padding: '3px 5px',
+//         borderRadius: '10px',
+//         // width: '50%'
+//     },
+//     inputBox: {
+//         backgroundColor: '#ddd',
+//         padding: '3px 5px',
+//         borderRadius: '10px',
+//         fontWeight: 'bold',
+//         // width: '50%'
+//     },
+//     title: {
+//         fontSize: '3em',
+//         fontWeight: 'bold',
+//         marginBottom: '50px'
+//     },
+//     btn: {
+//         padding: '10px 150px',
+//         color: 'white',
+//         backgroundColor: 'black',
+//         borderRadius: '15px',
+//         marginRight: '15px',
+//         fontWeight: 'bold',
+//     },
+//     miniTitle: {
+//         fontSize:'1.5em',
+//         marginBottom: '10px',
+//         fontWeight: 'bold'
+//     }
+// }
 
 export default AddProductForm;
