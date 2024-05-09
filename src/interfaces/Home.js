@@ -1,35 +1,18 @@
-import logo from '../assets/icon.png'
 import '../App.css';
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React from 'react';
 import Navigation from './Navigation';
-import ProductsView from '../component/Products/allProductView';
+import AllProductView from '../component/Products/allProductView.js';
 import { render } from '@testing-library/react';
+import SearchProducts from '../component/Products/SearchProducts.js';
 
 const Home = () => {
     return (
         <div className="App">
             <Navigation /> 
-            <ProductsView /> 
-
+            <AllProductView /> 
+            {/* <SearchProducts /> */}
     </div>
-    );
-    // return <ProductsView />
+    ); 
  }
-
-// {
-//   products.map(function(prd,i){
-//     return (
-//       <div className='post'> 
-//         <img src={logo} className='prd-img'/>
-//         <div className='prd-info'>
-//           <h5 className='prd-name'>{ prd }</h5>
-//           <p className='seller'>{ copySeller[i] }</p>
-//           <p className='price'>{ copyPrice[i] }</p>
-//         </div>
-//       </div>
-//     )
-//   })
-// }
 
 export default Home;

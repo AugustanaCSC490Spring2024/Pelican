@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import Home from '../src/interfaces/Home'
 import Post from '../src/interfaces/Post';
 import Chat from '../src/interfaces/Chat';
 import SignIn from './signin';
@@ -9,8 +10,6 @@ import reportWebVitals from './reportWebVitals';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import EachProductView from './component/Products/eachProductView';
-import AllProductView from './component/Products/allProductView';
-import Home from '../src/interfaces/Home'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

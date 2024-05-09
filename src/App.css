@@ -54,9 +54,13 @@
   background-color: white;
   color: black;
   font-weight: bold;
-  margin-right: 20px;
 }
-
+.post-btn:hover {
+  background-color: #dfdfdf;
+}
+.btn-space {
+  margin-right: 10px;
+}
 .post-btn a {
   text-decoration: none;
   color: black;
