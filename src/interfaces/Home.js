@@ -3,18 +3,19 @@ import '../App.css';
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navigation from './Navigation';
-import ProductView from '../component/Products/allProductView';
+import ProductsView from '../component/Products/allProductView';
+import { render } from '@testing-library/react';
 
 const Home = () => {
-
     return (
         <div className="App">
             <Navigation /> 
-            <ProductView /> 
+            <ProductsView /> 
 
     </div>
     );
-}
+    // return <ProductsView />
+ }
 
 // {
 //   products.map(function(prd,i){

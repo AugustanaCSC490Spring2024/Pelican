@@ -1,6 +1,6 @@
 import useProducts from "./useProducts";
 import React from 'react';
-import { Link, useNavigate, useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AllProductView = () => {
     const products = useProducts();

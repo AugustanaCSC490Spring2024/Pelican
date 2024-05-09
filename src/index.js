@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import Home from '../src/interfaces/Home';
 import Post from '../src/interfaces/Post';
 import Chat from '../src/interfaces/Chat';
 import SignIn from './signin';
@@ -11,6 +10,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import EachProductView from './component/Products/eachProductView';
 import AllProductView from './component/Products/allProductView';
+import Home from '../src/interfaces/Home'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,10 +20,10 @@ root.render(
         <Routes>
           <Route path="/" element={<SignIn />} /> 
           <Route exact path="/app/*" element={<App />} /> 
-          <Route path="/home" element={<Home />} />
+          <Route path="/home" element={<Home/>} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/post" element={<Post />} />
-          <Route path="/product/:productId" component={EachProductView} />
+          <Route path="/product/:productId" element={<EachProductView />} />
         </Routes>
       </Router>
     </GoogleOAuthProvider>

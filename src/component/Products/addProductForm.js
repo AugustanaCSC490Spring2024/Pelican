@@ -12,8 +12,7 @@ import defaultImage from '../../assets/icon.png';
 function AddProductForm() {
     const [product, setProduct] = useState({
         name: '',
-        price: '',
-        // seller: '',
+        price: '', 
         description: '',
         status: 'available',
         image: '',
@@ -33,21 +32,12 @@ function AddProductForm() {
             [e.target.name]: e.target.value,
         });
     }
-
-    // Handle Image Upload
-    const handleImageChange = (e) => {
-        setProduct({
-            ...product,
-            image: URL.createObjectURL(e.target.files[0]),
-        });
-    }
-
+    
     const handleImageUpload = (e) => {
         setImage(e.target.files[0]);
-    };
+   };
 
-    const saveImage = async () => {
-        // if (image === null) return defaultImage;
+    const saveImage = async () => { 
         if (image !== defaultImage) {
             const imageRef = ref(storage, `images/${product.id}`);
             const snapshot = await uploadBytes(imageRef, image);
@@ -67,12 +57,25 @@ function AddProductForm() {
         product.user = auth.currentUser.displayName;
         console.log(product);
         try {
+            // fix this to only have one id - optimize it 
             const imageUrl = await saveImage();
             product.image = imageUrl;
             const docRef = await addDoc(collection(db, "products"), product);
             console.log("Document written with ID: ", docRef.id);
             setMessage("Product added successfully");
             resetForm();
+
+            // const docRef = await addDoc(collection(db, "products"), product);
+            
+            // product.key = docRef.id;
+
+            // console.log("Document written with ID: ", docRef.id);
+            // setMessage("Product added successfully");
+            // const imageUrl = await saveImage();
+            
+            // product.image = imageUrl;
+            // //updatedoc to set image
+
         } catch (error) {
             console.error(error);
             setMessage(`Error: ${error.message}`);
@@ -112,19 +115,12 @@ function AddProductForm() {
                 />
                 <h3 style={styles.miniTitle}>Price ($)</h3>
                 <input type="text" name="price" placeholder="Price" value={product.price} onChange={handleChange} style={styles.nameInputWrapper}/>
-                {/* Try to get seller's id from authentication */}
-                {/* <input type="text" name="seller" placeholder="Seller" value={product.seller} onChange={handleChange} /> */}
+                <p>{product.price}</p>
                 <h3 style={styles.miniTitle}>Product Description</h3>
                 <textarea name="description" placeholder="Description" value={product.description} onChange={handleChange} style={styles.inputBox} cols="40" rows="5"></textarea>
-                {/* <input type="text" name="description" placeholder="Description" value={product.description} onChange={handleChange} style={styles.nameInputWrapper}/> */}
-                {/* <select name="status" value={product.status} onChange={handleChange}>
-                    <option value="available">Available</option>
-                    <option value="unavailable">Unavailable</option>
-                </select> */}
                 <h3 style={styles.miniTitle}>Image</h3>
                 <input type="file" name="image" ref={fileInput} onChange={handleImageUpload} style={styles.nameInputWrapper}/>
                 <h3 style={styles.miniTitle}>Category</h3>
-                {/* <input type="text" name="category" placeholder="Category" value={product.category} onChange={handleChange} style={styles.nameInputWrapper}/> */}
                 <select name="category" placeholder="Category" value={product.category} onChange={handleChange} style={styles.nameInputWrapper}>
                     <option>Electronics</option>
                     <option>Furnitures</option>
@@ -132,10 +128,8 @@ function AddProductForm() {
                     <option>Apparells</option>
                     <option>Miscellaneous</option>
                 </select>
-                {/* <h3 style={styles.miniTitle}>Meet-up Location</h3>
-                <input type="text" name="location" placeholder="Location" value={product.location} onChange={handleChange} style={styles.nameInputWrapper}/> */}
                 <div>
-                    <button style={styles.btn} type="submit">Add Product</button>
+                    <button style={styles.btn} type="submit">Add Product</button> 
                     <button style={styles.btn} type="button" onClick={resetForm}>Reset Form</button>
                 </div>
             </form>
