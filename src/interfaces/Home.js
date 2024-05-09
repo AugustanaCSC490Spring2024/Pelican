@@ -9,8 +9,9 @@ const Home = () => {
     return (
         <div className="App">
             <Navigation /> 
-            <AllProductView /> 
-            {/* <SearchProducts /> */}
+            {/* <AllProductView />  */}
+            <SearchProducts />
+            <AllProductView />
     </div>
     ); 
  }
