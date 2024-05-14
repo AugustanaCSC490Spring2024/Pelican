@@ -7,6 +7,7 @@ import {
     getDownloadURL,
 } from "firebase/storage";
 import defaultImage from '../../assets/icon.png';
+import '../../styles/addProductFrom.css';
 
 
 function AddProductForm() {
@@ -96,47 +97,104 @@ function AddProductForm() {
     }
 
     return (
-        <div style={styles.contatiner}>
-            <form onSubmit={handleSubmit} style={{ margin: '20px', padding: '20px' }}>
-                <h2 style={styles.title}>Post Your Product</h2>
-                <h3 style={styles.miniTitle}>Product Name</h3>
+        <div className='container'>
+            <form onSubmit={handleSubmit} className='postForm'>
+                <h2 className='title'>Post Your Product</h2>
+                {/* <h3 className='miniTitle'>Product Name</h3>
                 <input 
                     type="text" 
                     name="name" 
                     placeholder="Product Name" 
                     spellCheck="false"
                     autoCapitalize='words'
-                    style={styles.nameInputWrapper}
                     value={product.name} 
                     onChange={handleChange} 
+                    className='nameInputWrapper'
+                /> */}
+
+                <div className="wave-group">
+                    <input required type="text" className="input" 
+                    name="name" 
+                    spellCheck="false"
+                    autoCapitalize='words'
+                    value={product.name} 
+                    onChange={handleChange}/>
+                    <span className="bar"></span>
+                    <label className="label">
+                        <span className="label-char" style={{"--index": 0}}>P</span>
+                        <span className="label-char" style={{"--index": 1}}>r</span>
+                        <span className="label-char" style={{"--index": 2}}>o</span>
+                        <span className="label-char" style={{"--index": 3}}>d</span>
+                        <span className="label-char" style={{"--index": 4}}>u</span>
+                        <span className="label-char" style={{"--index": 5}}>c</span>
+                        <span className="label-char" style={{"--index": 6}}>t</span>
+                        <span className="label-char" style={{"--index": 7}}>&nbsp;</span>
+                        <span className="label-char" style={{"--index": 8}}>N</span>
+                        <span className="label-char" style={{"--index": 9}}>a</span>
+                        <span className="label-char" style={{"--index": 10}}>m</span>
+                        <span className="label-char" style={{"--index": 11}}>e</span>
+                    </label>
+                </div>
+
+                <div className="wave-group">
+                    <input required type="number" className="input" name="price" 
+                    value={product.price} 
+                    onChange={handleChange} />
+                    <span className="bar"></span>
+                    <label className="label">
+                        <span className="label-char" style={{"--index": 0}}>P</span>
+                        <span className="label-char" style={{"--index": 1}}>r</span>
+                        <span className="label-char" style={{"--index": 2}}>i</span>
+                        <span className="label-char" style={{"--index": 3}}>c</span>
+                        <span className="label-char" style={{"--index": 4}}>e</span>
+                        <span className="label-char" style={{"--index": 5}}>($)</span>
+                    </label>
+                </div>
+
+                {/* <h3 className='miniTitle'>Price ($)</h3>
+                <input 
+                    type="text" 
+                    name="price" 
+                    placeholder="Price" 
+                    value={product.price} 
+                    onChange={handleChange} 
+                    className='nameInputWrapper'
+                /> */}
+                <h3 className='miniTitle'>Product Description</h3>
+                <textarea 
+                    name="description" 
+                    placeholder="Type your product details..." 
+                    value={product.description} 
+                    onChange={handleChange} 
+                    cols="40" 
+                    rows="5" 
+                    className='inputBox'
                 />
-                <h3 style={styles.miniTitle}>Price ($)</h3>
-                <input type="text" name="price" placeholder="Price" value={product.price} onChange={handleChange} style={styles.nameInputWrapper}/>
-                {/* Try to get seller's id from authentication */}
-                {/* <input type="text" name="seller" placeholder="Seller" value={product.seller} onChange={handleChange} /> */}
-                <h3 style={styles.miniTitle}>Product Description</h3>
-                <textarea name="description" placeholder="Description" value={product.description} onChange={handleChange} style={styles.inputBox} cols="40" rows="5"></textarea>
-                {/* <input type="text" name="description" placeholder="Description" value={product.description} onChange={handleChange} style={styles.nameInputWrapper}/> */}
-                {/* <select name="status" value={product.status} onChange={handleChange}>
-                    <option value="available">Available</option>
-                    <option value="unavailable">Unavailable</option>
-                </select> */}
-                <h3 style={styles.miniTitle}>Image</h3>
-                <input type="file" name="image" ref={fileInput} onChange={handleImageUpload} style={styles.nameInputWrapper}/>
-                <h3 style={styles.miniTitle}>Category</h3>
-                {/* <input type="text" name="category" placeholder="Category" value={product.category} onChange={handleChange} style={styles.nameInputWrapper}/> */}
-                <select name="category" placeholder="Category" value={product.category} onChange={handleChange} style={styles.nameInputWrapper}>
+                <h3 className='miniTitle'>Image</h3>
+                <input 
+                    type="file" 
+                    name="image" 
+                    ref={fileInput} 
+                    onChange={handleImageUpload} 
+                    className='nameInputWrapper'
+                />
+                <h3 className='miniTitle'>Category</h3>
+                <select 
+                    name="category" 
+                    placeholder="Category" 
+                    value={product.category} 
+                    onChange={handleChange} 
+                    className='nameInputWrapper'
+                >
                     <option>Electronics</option>
                     <option>Furnitures</option>
                     <option>School Supplies</option>
                     <option>Apparells</option>
                     <option>Miscellaneous</option>
                 </select>
-                {/* <h3 style={styles.miniTitle}>Meet-up Location</h3>
-                <input type="text" name="location" placeholder="Location" value={product.location} onChange={handleChange} style={styles.nameInputWrapper}/> */}
                 <div>
-                    <button style={styles.btn} type="submit">Add Product</button>
-                    <button style={styles.btn} type="button" onClick={resetForm}>Reset Form</button>
+                    <button className='btn-12' type="submit" style={{ background: 'black' }}><span>Add Product</span></button>
+                    <button className='btn-12' type="button" style={{ background: 'black' }} onClick={resetForm}><span>Reset Form</span></button>
                 </div>
             </form>
         </div>
@@ -144,9 +202,6 @@ function AddProductForm() {
 }
 
 const styles = {
-    container: {
-        paddingLeft: '100px'
-    },
     nameInputWrapper: {
         fontSize: '1em',
         fontWeight: 'bold',
@@ -159,17 +214,19 @@ const styles = {
         backgroundColor: '#ddd',
         padding: '3px 5px',
         borderRadius: '10px',
-        width: '250px'
+        // width: '50%'
     },
     inputBox: {
         backgroundColor: '#ddd',
         padding: '3px 5px',
         borderRadius: '10px',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        // width: '50%'
     },
     title: {
         fontSize: '3em',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginBottom: '50px'
     },
     btn: {
         padding: '10px 150px',

@@ -117,7 +117,8 @@ button,
 [type=reset],
 [type=submit] {
     -webkit-appearance: button;
-    background-color: transparent;
+    /* background-color: black; */
+    background: transparent;
     background-image: none
 }
 
