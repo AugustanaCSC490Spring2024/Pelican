@@ -4,6 +4,9 @@ import logoTrans from '../assets/logo-trans.png';
 import { auth } from '../data/firebase.js'
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { db } from "../data/firebase.js";
+// import SearchComponent from '../component/Search/SearchBar.js';
+import SearchProducts from '../component/Products/SearchProducts.js';
 
 
 const Navigation = () => {
@@ -47,6 +50,7 @@ const Navigation = () => {
         </div>
         <div style={styles.menuCont}>
           <ul className='nav-links'>
+            {/* <li className='link-item'><SearchProducts db={db}/></li> */}
             <li className='link-item'><a href='/home'>Home</a></li>
             <li className='link-item'><a href='/chat'>Chat</a></li>
             <li className='link-item post-btn btn-space'><a href='/post'>Post</a></li>
@@ -63,6 +67,6 @@ const styles = {
     display: 'flex',
     alignItems: 'center'
   }
-}
+} 
 
 export default Navigation;

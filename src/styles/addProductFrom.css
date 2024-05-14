@@ -1,5 +1,6 @@
 .postForm {
     padding: 30px 500px;
+    /* text-align: center; */
 }
 .nameInputWrapper {
     font-size: 1em;
@@ -207,3 +208,54 @@
   }
   
   
+
+@media screen and (max-width: 1420px) {
+  .postForm {
+    padding: 30px 400px;
+  }
+}
+@media screen and (max-width: 1220px) {
+  .postForm {
+    padding: 30px 300px;
+  }
+}
+@media screen and (max-width: 1020px) {
+  .postForm {
+    padding: 30px 200px;
+  }
+}
+@media screen and (max-width: 820px) {
+  .postForm {
+    padding: 30px 100px;
+  }
+}
+@media screen and (max-width: 650px) {
+  .title {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+  }
+  .miniTitle {
+    font-size: 1.2em;
+  }
+  .wave-group .input {
+    font-size: 13px;
+  }
+  .btn-12 {
+    font-size: 13px;
+  }
+}
+@media screen and (max-width: 550px) {
+  .postForm {
+    padding: 20px 75px;
+  }
+  .title {
+    font-size: 2em;
+    margin-bottom: 15px;
+  }
+  .miniTitle {
+    font-size: 1em;
+  }
+  .inputBox {
+    font-weight: lighter;
+  }
+}

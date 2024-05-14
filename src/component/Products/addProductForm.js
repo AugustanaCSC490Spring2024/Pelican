@@ -13,8 +13,7 @@ import '../../styles/addProductFrom.css';
 function AddProductForm() {
     const [product, setProduct] = useState({
         name: '',
-        price: '',
-        // seller: '',
+        price: '', 
         description: '',
         status: 'available',
         image: '',
@@ -34,21 +33,12 @@ function AddProductForm() {
             [e.target.name]: e.target.value,
         });
     }
-
-    // Handle Image Upload
-    const handleImageChange = (e) => {
-        setProduct({
-            ...product,
-            image: URL.createObjectURL(e.target.files[0]),
-        });
-    }
-
+    
     const handleImageUpload = (e) => {
         setImage(e.target.files[0]);
-    };
+   };
 
-    const saveImage = async () => {
-        // if (image === null) return defaultImage;
+    const saveImage = async () => { 
         if (image !== defaultImage) {
             const imageRef = ref(storage, `images/${product.id}`);
             const snapshot = await uploadBytes(imageRef, image);
@@ -68,12 +58,25 @@ function AddProductForm() {
         product.user = auth.currentUser.displayName;
         console.log(product);
         try {
+            // fix this to only have one id - optimize it 
             const imageUrl = await saveImage();
             product.image = imageUrl;
             const docRef = await addDoc(collection(db, "products"), product);
             console.log("Document written with ID: ", docRef.id);
             setMessage("Product added successfully");
             resetForm();
+
+            // const docRef = await addDoc(collection(db, "products"), product);
+            
+            // product.key = docRef.id;
+
+            // console.log("Document written with ID: ", docRef.id);
+            // setMessage("Product added successfully");
+            // const imageUrl = await saveImage();
+            
+            // product.image = imageUrl;
+            // //updatedoc to set image
+
         } catch (error) {
             console.error(error);
             setMessage(`Error: ${error.message}`);
@@ -199,48 +202,6 @@ function AddProductForm() {
             </form>
         </div>
     )
-}
-
-const styles = {
-    nameInputWrapper: {
-        fontSize: '1em',
-        fontWeight: 'bold',
-        display: 'flex',
-        marginTop: '10px',
-        height: '52px !important', 
-        resize: 'none', 
-        border: 'none',
-        marginBottom: '15px',
-        backgroundColor: '#ddd',
-        padding: '3px 5px',
-        borderRadius: '10px',
-        // width: '50%'
-    },
-    inputBox: {
-        backgroundColor: '#ddd',
-        padding: '3px 5px',
-        borderRadius: '10px',
-        fontWeight: 'bold',
-        // width: '50%'
-    },
-    title: {
-        fontSize: '3em',
-        fontWeight: 'bold',
-        marginBottom: '50px'
-    },
-    btn: {
-        padding: '10px 150px',
-        color: 'white',
-        backgroundColor: 'black',
-        borderRadius: '15px',
-        marginRight: '15px',
-        fontWeight: 'bold',
-    },
-    miniTitle: {
-        fontSize:'1.5em',
-        marginBottom: '10px',
-        fontWeight: 'bold'
-    }
 }
 
 export default AddProductForm;

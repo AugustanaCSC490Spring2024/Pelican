@@ -34,6 +34,7 @@ function SignIn() {
                         onError={() => {
                             console.log('Login Failed');
                         }}
+                        useOneTap
                     />
                 </div>
                 <p className="text-center">Don't have an account? 

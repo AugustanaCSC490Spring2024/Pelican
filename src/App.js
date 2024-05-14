@@ -1,11 +1,9 @@
 import '../src/App.css';
 import React, { useState } from 'react';
-
-// import { SearchBar } from "./component/SearchComponents/SearchBar.js";
-// import { SearchResultsList } from "./component/SearchComponents/SearchResultsList";
-// import ProductView from './component/Products/productView';
-// import logoTrans from './assets/logo-trans.png';
-// import AddProductForm from './component/Products/addProductForm.js'
+import Home from './interfaces/Home';
+import Post from './interfaces/Post';
+import Chat from './interfaces/Chat';
+import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
 
 function App() {
   return (

@@ -71,6 +71,12 @@
   border-radius: 100px;
 }
 
+@media screen and (max-width: 500px) {
+  .navbar {
+    flex-direction: column;
+  }
+}
+
 /* Post Sytle */
 .post {
   display: grid;

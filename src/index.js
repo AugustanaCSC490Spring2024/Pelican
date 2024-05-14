@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import Home from '../src/interfaces/Home';
+import Home from '../src/interfaces/Home'
 import Post from '../src/interfaces/Post';
 import Chat from '../src/interfaces/Chat';
 import SignIn from './signin';
@@ -18,11 +18,11 @@ root.render(
       <Router>
         <Routes>
           <Route path="/" element={<SignIn />} /> 
-          {/* <Route exact path="/app/*" element={<App />} />  */}
-          <Route path="/home" element={<Home />} />
+          <Route exact path="/app/*" element={<App />} /> 
+          <Route path="/home" element={<Home/>} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/post" element={<Post />} />
-          <Route path="/product/:productId" component={EachProductView} />
+          <Route path="/product/:productId" element={<EachProductView />} />
         </Routes>
       </Router>
     </GoogleOAuthProvider>
