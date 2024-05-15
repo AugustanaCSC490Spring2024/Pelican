@@ -41,6 +41,7 @@ const Navigation = () => {
   }
 
   return (
+
       <div className='navbar'>
         <>
         <div style={{...styles.logoCont, zIndex: 1}}>
@@ -61,7 +62,7 @@ const Navigation = () => {
         <div style={{ position: 'absolute', width: '100%', display: 'flex', justifyContent: 'center', zIndex: 0}}>
             <SearchProducts />
         </div>
-      </div>
+    </div>
   );
 }
 

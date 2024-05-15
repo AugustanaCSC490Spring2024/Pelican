@@ -19,6 +19,7 @@ const ShowProducts = () => {
                         <div className='prd-des' style={{textAlign: 'center'}}>
                             <h2 className='prd-title' style={styles.prdInfoH2}> {product.name} - ${Number(product.price).toLocaleString()} </h2>
                             <p className='prd-seller' style ={styles.prdUser}> @{product.user} </p>
+                            {/* <a className='chat-btn' href='/chat'>Chat</a> */}
                         </div>
                     </div>
             ))}

@@ -54,6 +54,7 @@
   background-color: white;
   color: black;
   font-weight: bold;
+  margin-right: 10px;
 }
 .post-btn:hover {
   background-color: #dfdfdf;
