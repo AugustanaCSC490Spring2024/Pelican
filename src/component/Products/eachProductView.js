@@ -67,7 +67,8 @@ const EachProductView = () => {
           {/* Product info */}
           <div className="px-4 pb-16 sm:px-6 lg:max-w-7xl lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16 ms-10">
             <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-              <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{product.name}</h1>
+              <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl" style={{marginBottom: '15px'}}>{product.name}</h1>
+              <h3 className='text-xl tracking-tight text-gray-900' style={{marginBottom: '10px'}}>{product.category}</h3>
             </div>
 
             {/* Options */}

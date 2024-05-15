@@ -2,7 +2,7 @@ import  React, { useState, useEffect } from 'react';
 import { query, collection, where, getDocs } from "firebase/firestore";
 import { db } from "../../data/firebase";
 import { useNavigate } from 'react-router-dom';
-import SearchIcon from "@material-ui/icons/Search"; 
+// import SearchIcon from "@material-ui/icons/Search"; 
 import '../Search/Search.css';
  
 const SearchProducts = () => {
@@ -68,7 +68,10 @@ const SearchProducts = () => {
                 onChange={handleChange}
                 style={{ color: 'black' }} 
               />
-              <button type="submit"><SearchIcon /></button>
+              <button type="submit">
+                {/* <SearchIcon /> */}
+                Search
+                </button>
             </div>
           </form>
           {dropdown.length > 0 && (

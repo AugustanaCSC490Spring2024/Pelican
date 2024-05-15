@@ -59,9 +59,9 @@ const Navigation = () => {
           </ul>          
         </div> 
         </>
-        <div style={{ position: 'absolute', width: '100%', display: 'flex', justifyContent: 'center', zIndex: 0}}>
+        {/* <div style={{ position: 'absolute', width: '100%', display: 'flex', justifyContent: 'center', zIndex: 0}}>
             <SearchProducts />
-        </div>
+        </div> */}
     </div>
   );
 }
