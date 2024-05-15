@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { db } from '../../data/firebase';
 import { doc, getDoc } from "firebase/firestore";
-import { StarIcon } from '@heroicons/react/20/solid'
+import { StarIcon } from '@heroicons/react/20/solid';
+import ShowProducts from '../Products/showProducts.js';
 
 //temporary 
 const reviews = { href: '#', average: 4, totalCount: 117 }
@@ -49,6 +50,11 @@ const EachProductView = () => {
       <div className="pt-6">
         <nav aria-label="Breadcrumb">
           <ol role="list" className="mx-auto flex items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+            <li className='text-sm'>
+              <a href='/home'>
+                &lt; Back
+              </a>
+            </li>
             <li className="text-sm">
               <a href={product.href} aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
                 {product.name}
@@ -120,6 +126,8 @@ const EachProductView = () => {
           </div>
         </div>
       </div>
+      <div style={{height: '150px'}}></div>
+      <ShowProducts />
     </div> 
     // <div>
     // <h2>{product.name}</h2>
