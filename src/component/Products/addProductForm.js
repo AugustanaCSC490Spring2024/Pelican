@@ -54,7 +54,7 @@ function AddProductForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        product.id = Date.now();
+        product.diffid = Date.now();
         product.user = auth.currentUser.displayName;
         console.log(product);
         try {
