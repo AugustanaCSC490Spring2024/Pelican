@@ -75,7 +75,7 @@ const SearchProducts = () => {
             <div className="suggestion-list" style={{ position: 'absolute', width: '100%'}}>
               {dropdown.map((product) => (
                 <div
-                  key={product.uniqueKey}
+                  key={product.id}
                   product={product}
                   className="suggestion-item"
                   onClick={() => handleProductClick(product)}
