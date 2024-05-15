@@ -1,7 +1,7 @@
 import React from 'react';
 import './Search.css'
 
-const SearchComponent = ({ searchQuery, handleChange }) => { 
+const SearchBar = ({ searchQuery, handleChange }) => { 
   return (
     <div className='search-bar'>
       <input 
@@ -15,4 +15,4 @@ const SearchComponent = ({ searchQuery, handleChange }) => {
   );
 };
 
-export default SearchComponent;
+export default SearchBar;

@@ -14,8 +14,7 @@ const Navigation = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-
+  useEffect(() => { 
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
@@ -43,11 +42,12 @@ const Navigation = () => {
 
   return (
       <div className='navbar'>
-        <div style={styles.logoCont}>
+        <>
+        <div style={{...styles.logoCont, zIndex: 1}}>
           <img src={logoTrans} alt='logo' style={{width: '70px', height: '70px'}}></img>
           <h2 style={{ fontWeight: 'bold' }}>Pelican Marketplace</h2>
         </div>
-        <div style={styles.menuCont}>
+        <div style={{...styles.menuCont, zIndex: 1}}>
           <ul className='nav-links'>
             {/* <li className='link-item'><SearchProducts db={db}/></li> */}
             <li className='link-item'><a href='/home'>Home</a></li>
@@ -56,6 +56,10 @@ const Navigation = () => {
             <li className='link-item post-btn' ><button onClick={handleLogout}>Logout</button></li>
             {/* <li className='link-item'>{user.displayName}</li> */}
           </ul>          
+        </div> 
+        </>
+        <div style={{ position: 'absolute', width: '100%', display: 'flex', justifyContent: 'center', zIndex: 0}}>
+            <SearchProducts />
         </div>
       </div>
   );

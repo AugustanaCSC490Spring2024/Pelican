@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import '../../styles/products.css'
+import useProducts from './useProducts';
 
-const ShowProducts = ({ products }) => {
+const ShowProducts = () => {
+    const products = useProducts();
     const navigate = useNavigate();
 
     const handleProductClick = (productId) => {
