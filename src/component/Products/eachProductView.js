@@ -50,7 +50,7 @@ const EachProductView = () => {
       <div className="pt-6">
         <nav aria-label="Breadcrumb">
           <ol role="list" className="mx-auto flex items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-            <li className='text-sm'>
+            <li className='text-sm font-bold'>
               <a href='/home'>
                 &lt; Back
               </a>
