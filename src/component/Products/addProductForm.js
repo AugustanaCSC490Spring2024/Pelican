@@ -21,6 +21,7 @@ function AddProductForm() {
         location: '',
         isShoppingList: false,
         user: '',
+        sellerId: '',
     });
     const fileInput = useRef(null);
 
@@ -56,6 +57,7 @@ function AddProductForm() {
         e.preventDefault();
         product.diffid = Date.now();
         product.user = auth.currentUser.displayName;
+        product.sellerId = auth.currentUser.uid;
         console.log(product);
         try {
             // fix this to only have one id - optimize it 
