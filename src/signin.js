@@ -1,8 +1,9 @@
 import { GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import { GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 import { auth } from '../src/data/firebase';
-import './styles/tailwind.css'
+import './styles/tailwind.css';
 
 function SignIn() {
     const navigate = useNavigate();
@@ -11,13 +12,28 @@ function SignIn() {
         try {
             const idToken = credentialResponse.credential;
             const credential = GoogleAuthProvider.credential(idToken);
-            await signInWithCredential(auth, credential);
+            const userCredential = await signInWithCredential(auth, credential);
+            
+            const user = userCredential.user;
+            const firestore = getFirestore();
+
+            const userDocRef = doc(firestore, 'users', user.uid);
+
+            const userDoc = await getDoc(userDocRef);
+
+            if (!userDoc.exists()) {
+                await setDoc(userDocRef, {
+                    uid: user.uid,
+                    username: user.displayName,
+                    email: user.email
+                });
+            }
+
             navigate('/home');
         } catch (error) {
             console.error('Firebase sign-in error:', error);
         }
     };
-
 
     return (
         <main className="w-full h-screen flex flex-col items-center justify-center px-4">
