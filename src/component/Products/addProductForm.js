@@ -18,7 +18,6 @@ function AddProductForm() {
         status: 'available',
         image: '',
         category: '',
-        location: '',
         isShoppingList: false,
         user: '',
         sellerId: '',
@@ -94,7 +93,6 @@ function AddProductForm() {
             status: 'available',
             image: '',
             category: '',
-            location: '',
             isShoppingList: false,
         });
         // fileInput.current.value = '';
