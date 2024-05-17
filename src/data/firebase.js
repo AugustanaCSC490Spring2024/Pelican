@@ -20,7 +20,6 @@ const firebaseConfig = {
   measurementId: "G-KBY11FZQVF",
 }
 
-//apiKey: AIzaSyCFE3jK_6IA6rr7F9BDSsYtSP0BziYBtDM
 
 // Help debug missing credentials (later)
 if (!firebaseConfig.apiKey) throw new Error("Missing Firebase credentials: apiKey");

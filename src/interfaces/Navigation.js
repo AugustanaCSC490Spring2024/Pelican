@@ -4,10 +4,6 @@ import logoTrans from '../assets/logo-trans.png';
 import { auth } from '../data/firebase.js'
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { db } from "../data/firebase.js";
-// import SearchComponent from '../component/Search/SearchBar.js';
-import SearchProducts from '../component/Products/SearchProducts.js';
-
 
 const Navigation = () => {
   const [user, setUser] = useState(null);
@@ -43,25 +39,18 @@ const Navigation = () => {
   return (
 
       <div className='navbar'>
-        <>
         <div style={{...styles.logoCont, zIndex: 1}}>
           <img src={logoTrans} alt='logo' style={{width: '70px', height: '70px'}}></img>
           <h2 style={{ fontWeight: 'bold' }}>Pelican Marketplace</h2>
         </div>
         <div style={{...styles.menuCont, zIndex: 1}}>
           <ul className='nav-links'>
-            {/* <li className='link-item'><SearchProducts db={db}/></li> */}
             <li className='link-item'><a href='/home'>Home</a></li>
             <li className='link-item'><a href='/chat'>Chat</a></li>
             <li className='link-item post-btn btn-space'><a href='/post'>Post</a></li>
             <li className='link-item post-btn' ><button onClick={handleLogout}>Logout</button></li>
-            {/* <li className='link-item'>{user.displayName}</li> */}
           </ul>          
-        </div> 
-        </>
-        {/* <div style={{ position: 'absolute', width: '100%', display: 'flex', justifyContent: 'center', zIndex: 0}}>
-            <SearchProducts />
-        </div> */}
+        </div>
     </div>
   );
 }

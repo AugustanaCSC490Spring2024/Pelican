@@ -3,7 +3,6 @@ import { auth, db } from '../../data/firebase.js';
 import { collection, query, orderBy, onSnapshot, addDoc } from 'firebase/firestore';
 import './useChat.css'; 
 
-// const useChat = ({ receiverId }) => {
 const useChat = () => {
     const [user, setUser] = useState(null);
     const [messages, setMessages] = useState([]);
@@ -46,7 +45,6 @@ const useChat = () => {
           text,
           createdAt: new Date(),
           senderId: user.uid,
-        //   receiverId
         });
         setText('');
       } catch (error) {
@@ -64,12 +62,10 @@ const useChat = () => {
   
     return (
       <div className="container">
-        {/* <h1>Chatting with {receiverId}</h1> */}
         <h1>Chatting with receiver</h1>
         <ul className="message-list">
           {messages.map(message => (
             <li key={message.id}>
-              {/* {message.text} - {message.senderId === user.uid ? 'You' : 'Other User'} */}
             </li>
           ))}
         </ul>

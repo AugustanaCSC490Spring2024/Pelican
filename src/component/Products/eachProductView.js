@@ -129,11 +129,6 @@ const EachProductView = () => {
       <div style={{height: '150px'}}></div>
       <ShowProducts />
     </div> 
-    // <div>
-    // <h2>{product.name}</h2>
-    // <img src={product.image} alt={product.name} />
-    // <p>{product.description}</p>
-    // </div>
   );
 }
 
