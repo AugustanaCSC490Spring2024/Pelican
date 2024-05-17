@@ -1,87 +1,77 @@
 import React, { useState, useEffect } from 'react';
-import { auth, db } from '../../data/firebase.js';
-import { collection, query, orderBy, onSnapshot, addDoc } from 'firebase/firestore';
-import './useChat.css'; 
+import { useParams } from 'react-router-dom';
+import { db, auth } from '../../data/firebase';
+import { useNavigate } from 'react-router-dom';
+import { collection, addDoc, query, where, onSnapshot, orderBy } from 'firebase/firestore';
+import '../../styles/chat.css';
 
-const useChat = () => {
-    const [user, setUser] = useState(null);
+const Chatting = () => {
+    const { productId } = useParams();
     const [messages, setMessages] = useState([]);
-    const [text, setText] = useState('');
-  
+    const [newMessage, setNewMessage] = useState("");
+    const [user, setUser] = useState(null);
+
     useEffect(() => {
-      const unsubscribe = auth.onAuthStateChanged(user => {
-        setUser(user);
-      });
-  
-      return () => unsubscribe();
-    }, []);
-  
-    useEffect(() => {
-      if (!user) return;
-  
-      const unsubscribe = onSnapshot(query(collection(db, 'messages'), orderBy('createdAt')), snapshot => { 
-        const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setMessages(data);
-      });
-  
-      return () => unsubscribe();
-    }, [user]);
-  
-    const handleSignIn = async () => {
-      try {
-        const provider = new db.auth.GoogleAuthProvider();
-        await auth.signInWithPopup(provider);
-      } catch (error) {
-        console.error('Error signing in:', error);
-      }
-    };
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      if (text.trim() === '') return;
-  
-      try {
-        await addDoc(collection(db, 'messages'), { 
-          text,
-          createdAt: new Date(),
-          senderId: user.uid,
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                setUser(user);
+            }
         });
-        setText('');
-      } catch (error) {
-        console.error('Error sending message:', error);
-      }
+        return () => unsubscribe();
+    }, []);
+
+    useEffect(() => {
+        const q = query(collection(db, "messages"), where("productId", "==", productId), orderBy("timestamp", "asc"));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const msgs = [];
+            querySnapshot.forEach((doc) => {
+                msgs.push(doc.data());
+            });
+            setMessages(msgs);
+        });
+        return () => unsubscribe();
+    }, [productId]);
+
+    const handleSend = async (e) => {
+        e.preventDefault();
+        if (newMessage.trim() !== "") {
+            await addDoc(collection(db, "messages"), {
+                text: newMessage,
+                timestamp: new Date(),
+                productId: productId,
+                userId: user.uid,
+                username: user.displayName
+            });
+            setNewMessage("");
+        }
     };
-  
-    if (!user) {
-      return (
-        <div>
-          <button onClick={handleSignIn}>Sign in with Google</button>
-        </div>
-      );
-    }
-  
+
     return (
-      <div className="container">
-        <h1>Chatting with receiver</h1>
-        <ul className="message-list">
-          {messages.map(message => (
-            <li key={message.id}>
-            </li>
-          ))}
-        </ul>
-        <form className="message-form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            className="message-input"
-            placeholder="Type your message..."
-          />
-          <button type="submit" className="send-button">Send</button>
-        </form>
-      </div>
+        <div className="App">
+            <div className="chat-container">
+                <div className="messages"> 
+                    {messages.map((msg, index) => (
+                        <div key={index} className={`message ${msg.userId === user.uid ? 'sent' : 'received'}`}>
+                            <div className="message-info">
+                                <span className="username">{msg.username}</span>
+                                <span className="timestamp">{new Date(msg.timestamp.toDate()).toLocaleTimeString()}</span>
+                            </div>
+                            <div className="message-text">{msg.text}</div>
+                        </div>
+                    ))}
+                </div>
+                <form onSubmit={handleSend} className="message-form">
+                    <input
+                        type="text"
+                        placeholder="Type a message..."
+                        value={newMessage}
+                        onChange={(e) => setNewMessage(e.target.value)}
+                    />
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </div>
     );
-  };
-  
-  export default useChat;
-  
+};
+
+export default Chatting;

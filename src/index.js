@@ -1,10 +1,11 @@
+// index.js
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import Home from '../src/interfaces/Home'
-import Post from '../src/interfaces/Post';
-import Chat from '../src/interfaces/Chat';
+import Home from './interfaces/Home';
+import Post from './interfaces/Post';
+import Chat from './interfaces/Chat';
 import SignIn from './signin';
 import reportWebVitals from './reportWebVitals';
 import { GoogleOAuthProvider } from '@react-oauth/google';
@@ -17,9 +18,9 @@ root.render(
     <GoogleOAuthProvider clientId="354512485882-ea968m8en83dr08svv1gkin8ns9etofu.apps.googleusercontent.com">
       <Router>
         <Routes>
-          <Route path="/" element={<SignIn />} /> 
-          <Route exact path="/app/*" element={<App />} /> 
-          <Route path="/home" element={<Home/>} />
+          <Route path="/" element={<SignIn />} />
+          <Route exact path="/app/*" element={<App />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/post" element={<Post />} />
           <Route path="/product/:productId" element={<EachProductView />} />

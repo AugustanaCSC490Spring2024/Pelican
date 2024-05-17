@@ -1,17 +1,17 @@
-import '../App.css';
+// Chat.js
 import React from 'react';
 import Navigation from './Navigation';
-import 'firebase/firestore';
-import 'firebase/auth';
+import '../styles/chat.css';
+import Chatting from '../component/Chat/useChat.js';
 
 const Chat = () => {
+
     return (
         <div className="App">
             <Navigation />
-            <h1>Chatting Page</h1>
-            
+            <Chatting />
         </div>
     );
-}
+};
 
 export default Chat;
