@@ -9,7 +9,6 @@ import {
 import defaultImage from '../../assets/icon.png';
 import '../../styles/addProductFrom.css';
 
-
 function AddProductForm() {
     const [product, setProduct] = useState({
         name: '',
@@ -33,14 +32,14 @@ function AddProductForm() {
             [e.target.name]: e.target.value,
         });
     }
-    
+
     const handleImageUpload = (e) => {
         setImage(e.target.files[0]);
-   };
+    };
 
-    const saveImage = async () => { 
+    const saveImage = async (productId) => { 
         if (image !== defaultImage) {
-            const imageRef = ref(storage, `images/${product.id}`);
+            const imageRef = ref(storage, `images/${productId}`);
             const snapshot = await uploadBytes(imageRef, image);
             console.log('Uploaded image successfully!');
             const url = await getDownloadURL(snapshot.ref);
@@ -49,35 +48,22 @@ function AddProductForm() {
         } else {
             return defaultImage;
         }
-        
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        product.diffid = Date.now();
+        const productId = Date.now().toString(); // Generate a unique ID
+        product.diffid = productId;
         product.user = auth.currentUser.displayName;
         product.sellerId = auth.currentUser.uid;
         console.log(product);
         try {
-            // fix this to only have one id - optimize it 
-            const imageUrl = await saveImage();
+            const imageUrl = await saveImage(productId); // Pass the unique ID to saveImage
             product.image = imageUrl;
             const docRef = await addDoc(collection(db, "products"), product);
             console.log("Document written with ID: ", docRef.id);
             setMessage("Product added successfully");
             resetForm();
-
-            // const docRef = await addDoc(collection(db, "products"), product);
-            
-            // product.key = docRef.id;
-
-            // console.log("Document written with ID: ", docRef.id);
-            // setMessage("Product added successfully");
-            // const imageUrl = await saveImage();
-            
-            // product.image = imageUrl;
-            // //updatedoc to set image
-
         } catch (error) {
             console.error(error);
             setMessage(`Error: ${error.message}`);
@@ -95,7 +81,6 @@ function AddProductForm() {
             category: '',
             isShoppingList: false,
         });
-        // fileInput.current.value = '';
         setImage(defaultImage);
     }
 
@@ -103,18 +88,6 @@ function AddProductForm() {
         <div className='container'>
             <form onSubmit={handleSubmit} className='postForm'>
                 <h2 className='title'>Post Your Product</h2>
-                {/* <h3 className='miniTitle'>Product Name</h3>
-                <input 
-                    type="text" 
-                    name="name" 
-                    placeholder="Product Name" 
-                    spellCheck="false"
-                    autoCapitalize='words'
-                    value={product.name} 
-                    onChange={handleChange} 
-                    className='nameInputWrapper'
-                /> */}
-
                 <div className="wave-group">
                     <input required type="text" className="input" 
                     name="name" 
@@ -154,15 +127,6 @@ function AddProductForm() {
                     </label>
                 </div>
 
-                {/* <h3 className='miniTitle'>Price ($)</h3>
-                <input 
-                    type="text" 
-                    name="price" 
-                    placeholder="Price" 
-                    value={product.price} 
-                    onChange={handleChange} 
-                    className='nameInputWrapper'
-                /> */}
                 <h3 className='miniTitle'>Product Description</h3>
                 <textarea 
                     name="description" 
