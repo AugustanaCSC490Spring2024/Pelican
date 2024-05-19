@@ -5,12 +5,16 @@ import Detail from './detail/Detail'
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../data/firebase';
 import { useUserStore } from '../../data/userStore'
+import Notification from '../notification/Notification'
+import { useChatStore } from '../../data/chatStore';
 
 export default function ManageChat() {
     const {currentUser, isLoading, fetchUserInfo} = useUserStore()
+    const {chatId} = useChatStore();
+
     useEffect (( ) => {
         const unSub = onAuthStateChanged (auth, (user) => {
-            fetchUserInfo(user.uid);
+            fetchUserInfo(user?.uid);
         });
         return () => {
             unSub();
@@ -24,8 +28,9 @@ export default function ManageChat() {
     return (
         <div style={styles.container}>
             <List />
-            <Chat />
+            {chatId && <Chat />}
             <Detail />
+            <Notification />
         </div>
   )
 }

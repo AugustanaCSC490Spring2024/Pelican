@@ -4,10 +4,13 @@ import { useState } from "react";
 import { db } from "../../../../../data/firebase";
 import { getDocs, query, where, doc, updateDoc, arrayUnion } from "@firebase/firestore";
 import { useUserStore } from "../../../../../data/userStore";
+import avatar from "../../../../../assets/avatar.png";
+import { toast } from "react-toastify";
 
 const AddUser = ( ) => {
-    const [user, setUser] = useState({ });
+    const [user, setUser] = useState(null);
     const { currentUser } = useUserStore();
+
     const handleSearch = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target); 
@@ -43,25 +46,46 @@ const AddUser = ( ) => {
                     receiverId: currentUser.uid,
                     updatedAt: Date.now(),
                 }),
-            }); 
+            }, { merge: true }); 
+
+            await updateDoc(doc(userChatsRef, currentUser.uid), {
+                chats: arrayUnion({
+                    chatId: newChatRef.id,
+                    lastMessage: "",
+                    receiverId: user.uid,
+                    updatedAt: Date.now(),
+                }),
+            }, { merge: true }); 
+
             console.log(newChatRef.id);
+            toast.success("User added successfully");
         } catch (error) {
             console.log(error);
+            toast.error("Failed to add user");
         }
     }
     return (
-        <div className="addUser">
-            <form onSubmit={handleSearch}>
-                <input type="text" placeholder="Username" name="username" />
-                <button>Search</button>
+        <div style={styles.addUser}>
+            <form onSubmit={handleSearch} style={{ display: 'flex', gap: 20}}>
+                <input 
+                    type="text" 
+                    placeholder="Username" 
+                    name="username" 
+                    style={styles.input}    
+                />
+                <button style={styles.button}>Search</button>
             </form>
-            <div className="user">
-            <div className="detail">
-                <img src="./avatar.png" alt="" />
-                <span>Jane Doe</span>
-            </div>
-            <button onClick={handleAdd}>Add User</button>
-            </div>
+            {user && <div style={styles.user}>
+                <div style={styles.detail}>
+                    <img 
+                        src={user.avatr || avatar} 
+                        alt="" 
+                        style={styles.userImage}
+                    />
+                    <span>{user.username}</span>
+                </div>
+                <button style={styles.button} onClick={handleAdd}>Add User</button>
+            </div>}
         </div>
     );
 };
@@ -78,6 +102,7 @@ const styles = {
         display: 'flex',
         alignItems: 'center',
         gap: '20px',
+        justifyContent: 'space-between',
     },
     avatar: {
         backgroundColor: 'blue',
@@ -101,7 +126,7 @@ const styles = {
     },
     button: {
         padding: '10px',
-        backgroundColor: 'blue',
+        backgroundColor: "#1a73e8",
         color: 'white',
         borderRadius: '5px',
         border: 'none',

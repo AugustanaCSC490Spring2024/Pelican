@@ -5,13 +5,15 @@ import search from './../../../../assets/search.png'
 import avatar from './../../../../assets/avatar.png'
 import { useUserStore } from '../../../../data/userStore'
 import { db } from '../../../../data/firebase'
-import { onSnapshot, doc, getDoc } from 'firebase/firestore'
+import { onSnapshot, doc, getDoc, updateDoc } from 'firebase/firestore'
 import AddUser from './addUser/AddUser'
+import { useChatStore } from '../../../../data/chatStore'
 
 export default function ChatList() {
     const [addMode, setAddMode] = useState(false); 
     const [chats, setChats] = useState([]); 
     const { currentUser } = useUserStore();
+    const { changeChat, chatId }  = useChatStore();
 
     useEffect (() => {
         if (!currentUser?.uid) return;
@@ -26,7 +28,7 @@ export default function ChatList() {
             const promises = items.map(async (item) => {
                 const userDocRef = await doc(db, "users", item.receiverId);
                 const userDocSnap = await getDoc(userDocRef);
-                const user = userDocSnap.exists() ? userDocSnap.data() : {};
+                const user = userDocSnap.data();
                 return {...item, user};
             });
             const chatData = await Promise.all(promises);
@@ -36,6 +38,25 @@ export default function ChatList() {
             unSub();
         };
     }, [currentUser?.uid]);
+
+    const handleSelect = async(chat) => {
+        const userChats = chats.map((item) => {
+            const { user, ...rest } = item;
+            return rest;
+        })
+        const chatIndex = userChats.findIndex((item) => item.chatId === chat.chatId);
+        userChats[chatIndex].isSeen = true;
+        const userChatsRef = doc(db, "userchats", currentUser.uid);
+
+        try {
+            await updateDoc(userChatsRef, {
+                chats: userChats,
+            });
+            changeChat(chat.chatId, chat.user);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return ( 
         <div style={styles.chatList}>
@@ -52,44 +73,19 @@ export default function ChatList() {
                 />
             </div>
             {chats.map((chat) => (
-                <div style={styles.item} key={chat.chatId}>
-                    <img style={styles.itemImg} src={avatar} alt=""/>
+                <div 
+                    style={{...styles.item, backgroundColor: chat?.isSeen ? 'transparent' : 'rgba(17, 25, 40, 0.7)'}} 
+                    key={chat.chatId} 
+                    onClick={() => handleSelect(chat)}
+                >
+                    <img style={styles.itemImg} src={chat.user.photoURL || avatar} alt=""/>
                     <div style={styles.itemInfo}>
-                        <div style={styles.itemName}>Name</div>
+                        <div style={styles.itemName}>{chat.user.username}</div>
                         <div style={styles.itemMessage}>{chat.lastMessage}</div>
                     </div>
                 </div>
             ))}
-            
-            <div style={styles.item}>
-                <img style={styles.itemImg} src={avatar} alt=""/>
-                <div style={styles.itemInfo}>
-                    <div style={styles.itemName}>Name</div>
-                    <div style={styles.itemMessage}>Message</div>
-                </div>
-            </div>
-            <div style={styles.item}>
-                <img style={styles.itemImg} src={avatar} alt=""/>
-                <div style={styles.itemInfo}>
-                    <div style={styles.itemName}>Name</div>
-                    <div style={styles.itemMessage}>Message</div>
-                </div>
-            </div>
-            <div style={styles.item}>
-                <img style={styles.itemImg} src={avatar} alt=""/>
-                <div style={styles.itemInfo}>
-                    <div style={styles.itemName}>Name</div>
-                    <div style={styles.itemMessage}>Message</div>
-                </div>
-            </div>
-            <div style={styles.item}>
-                <img style={styles.itemImg} src={avatar} alt=""/>
-                <div style={styles.itemInfo}>
-                    <div style={styles.itemName}>Name</div>
-                    <div style={styles.itemMessage}>Message</div>
-                </div>
-            </div>
-            <AddUser />
+            {addMode && <AddUser />}
         </div>
     )
 }

@@ -27,6 +27,10 @@ function SignIn() {
                     username: user.displayName,
                     email: user.email
                 });
+
+                await setDoc(doc(firestore, 'userchats', user.uid), {
+                    chats: []
+                });
             }
 
             navigate('/home');

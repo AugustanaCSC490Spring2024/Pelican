@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import './chat.css'
 import avatar from './../../../assets/avatar.png'
 import phone from './../../../assets/phone.png'
@@ -10,14 +10,77 @@ import mic from './../../../assets/mic.png'
 import emoji from './../../../assets/emoji.png' 
 import EmojiPicker from 'emoji-picker-react'
 import monochrome from './../../../assets/monochrome-icon.png'
+import { onSnapshot, doc, updateDoc, arrayUnion, getDoc } from '@firebase/firestore'
+import { db } from './../../../data/firebase'
+import { useChatStore } from '../../../data/chatStore'
+import { useUserStore } from '../../../data/userStore'
 
 export default function Chat() {
   const [openEmoji, setOpenEmoji] = useState(false);
   const [text, setText] = useState('');
+  const [messages, setMessages] = useState([]);
+  const [chat, setChat] = useState()
+
+  const { chatId, user } = useChatStore()
+  const { currentUser } = useUserStore()
+
+  
+  const endRef = useRef(null)
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: 'smooth' })
+  })
+
+  // useEffect(() => {
+  //   const unSub = onSnapshot(doc(db, "chats", chatId), async (res) => {
+  //     const data = res.data()
+  //     setMessages(data.messages)
+  //   })
+  // })
+
+  useEffect(() => {
+    const unSub = onSnapshot(doc(db, "chats", chatId), async (res) => {
+      setChat(res.data())
+    })
+    return () => {
+      unSub()
+    }
+  }, [chatId])
    
   const handleEmojiClick = (e) => {
     setText(text + e.emoji)
     // setOpenEmoji(false)
+  }
+
+  const handleSend = async () => {
+    if (text === '') return
+    try {
+      await updateDoc(doc(db, "chats", chatId), {
+        messages: arrayUnion({
+          text: text,
+          createAt: Date.now(),
+          senderId: currentUser.uid,
+        })
+      })
+
+      const userIDs = [currentUser.uid, user.uid]
+      userIDs.forEach(async (id) => {
+        const userChatsRef = doc(db,"userchats", id)
+        const userChatsSnapshot = await getDoc(userChatsRef)
+        if (userChatsSnapshot.exists()){
+          const userChatsData = userChatsSnapshot.data()
+          const chatIndex = userChatsData.chats.findIndex(c => c.chatId === chatId)
+          userChatsData.chats[chatIndex].lastMessage = text
+          userChatsData.chats[chatIndex].isSeen = id === currentUser.id ? true : false
+          userChatsData.chats[chatIndex].updatedAt = Date.now()
+
+          await updateDoc(userChatsRef, {
+            chats: userChatsData.chats
+          })
+        } 
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -26,8 +89,8 @@ export default function Chat() {
           <div style={styles.user}>
             <img style={styles.img} src={avatar} alt="" />
             <div style={styles.profileInfo}>
-              <span style={styles.infoName}>Jane Doe</span>
-              <p style={styles.infoMsg}>Lorem ipsum dolor, sit amet.</p>
+              <span style={styles.infoName}>{user?.username}</span>
+              <p style={styles.infoMsg}>{text}</p>
             </div>
           </div>
           <div style={styles.icons}> 
@@ -37,7 +100,7 @@ export default function Chat() {
           </div>
           </div>
           <div style={styles.center}>
-            <div style={styles.message}>
+            {/* <div style={styles.message}>
               <img style={styles.img} src={avatar} alt="" />
               <div style={styles.info}>
                 <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus 
@@ -47,8 +110,8 @@ export default function Chat() {
                 </p>
                 <span style={{fontSize: 13}}>1 min ago</span>
               </div>
-            </div> 
-            <div style={styles.messageOwn}> 
+            </div>  */}
+            {/* <div style={styles.messageOwn}> 
               <div style={styles.infoOwn}>
                 <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus 
                 quis quae qui! Sint asperiores vero nobis deserunt aperiam iusto
@@ -57,8 +120,8 @@ export default function Chat() {
                 </p>
                 <span style={{fontSize: 13}}>1 min ago</span>
               </div>
-            </div> 
-            <div style={styles.message}>
+            </div>  */}
+            {/* <div style={styles.message}>
               <img style={styles.img} src={avatar} alt="" />
               <div style={styles.info}>
                 <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus 
@@ -68,8 +131,17 @@ export default function Chat() {
                 </p>
                 <span style={{fontSize: 13}}>1 min ago</span>
               </div>
-            </div> 
-            <div style={styles.messageOwn}> 
+            </div>  */}
+            {chat?.messages?.map((message) => (
+              <div key={message?.createAt} style={styles.messageOwn}>
+                <img style={styles.img} src={avatar} alt="" />
+                <div style={styles.info}>
+                  <p>{message.text}</p>
+                  <span style={{fontSize: 13}}>1 min ago</span>
+                </div>
+              </div>
+            ))}
+            {/* <div style={styles.messageOwn}> 
               <img 
                 src={monochrome} 
                 alt='' 
@@ -83,7 +155,8 @@ export default function Chat() {
                 </p>
                 <span style={{fontSize: 13}}>1 min ago</span>
               </div>
-            </div> 
+            </div>  */}
+            <div ref={endRef}></div>
           </div>
           <div style={styles.bottom}>
             <div style={styles.icons}>
@@ -109,7 +182,7 @@ export default function Chat() {
                 <EmojiPicker open={openEmoji} onEmojiClick={handleEmojiClick} />
               </div>
             </div>
-            <button style={styles.sendButton}>Send</button>
+            <button style={styles.sendButton} onClick={handleSend}>Send</button>
           </div>
       </div>
   )
