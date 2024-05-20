@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Detail() {
   return (
-    <div style={styles.detail}>Detail</div>
+    <div style={styles.detail}></div>
   )
 }
 

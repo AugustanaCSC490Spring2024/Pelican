@@ -99,28 +99,8 @@ const EachProductView = () => {
         console.log(error);
         toast.error("Failed to start chat");
     }
-  } 
+  }  
 
-
-
-  const handleChat2 = async (e) => {
-    e.preventDefault();
-    const sellerId = product.user;
-
-    if (!auth.currentUser) {
-      toast.error("Please log in to start a chat.");
-      navigate('/');  
-      return;
-    }
-
-    if (!sellerId) {
-      toast.error("Seller information is missing.");
-      return;
-    }
-
-    navigate(`/chat/${sellerId}`, { state: { productId } });
-  }
-  
   return (
     <div className="bg-white">
       <div className="pt-6">
@@ -205,6 +185,7 @@ const EachProductView = () => {
         </div>
       </div>
       <div style={{height: '150px'}}></div>
+      <div style={{fontSize: 30, padding: 20, fontWeight: 'bold'}}>Other Products</div>
       <ShowProducts />
     </div> 
   );

@@ -57,6 +57,7 @@ const styles = {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
+      backgroundColor: 'rgba(20, 25, 40, 0.2)',
     },
     user: {
         display: 'flex',

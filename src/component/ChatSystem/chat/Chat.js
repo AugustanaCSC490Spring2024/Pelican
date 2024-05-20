@@ -160,8 +160,9 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: '20px',
+    padding: '15px',
     borderBottom: '1px solid #e0e0e0',
+    backgroundColor: 'rgba(20, 25, 40, 0.2)',
   },
   user: {
     display: 'flex',
@@ -240,10 +241,11 @@ const styles = {
     padding: '20px',
     borderTop: '1px solid #e0e0e0',
     gap: '20px',
+    backgroundColor: 'rgba(20, 25, 40, 0.2)',
   },
   input: {
     flex: 1,
-    backgroundColor: 'rgba(17, 25, 40, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
     color: 'black',
     padding: '10px', 
     border: 'none',
