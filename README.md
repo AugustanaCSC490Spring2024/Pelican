@@ -4,7 +4,7 @@ A centralized platform for users to buy, sell, exchange, and donate goods and se
 
 # Blog
 
-Click [here](https://sites.google.com/augustana.edu/pelican-marketplace?usp=sharing) to acess our blog.
+Click [here](https://sites.google.com/augustana.edu/pelican-marketplace?usp=sharing) to access our blog.
 
 # Getting Started with Create React App
 
