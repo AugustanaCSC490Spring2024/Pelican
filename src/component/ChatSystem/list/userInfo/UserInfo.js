@@ -18,11 +18,25 @@ export default function UserInfo() {
                 {/* <div style={styles.avatar}>
                     {getInitials(auth.currentUser?.displayName)}
                 </div> */}
-                <img
+                {/* <img
                     style={styles.userImage}
-                    src={currentUser?.photoURL}
+                    src={auth.currentUser?.photoURL}
                     alt="User"
-                />
+                    referrerPolicy="no-referrer"
+                /> */}
+                {
+                    auth.currentUser?.photoURL ? (
+                        <img
+                            style={styles.userImage}
+                            src={auth.currentUser.photoURL}
+                            alt="User" 
+                        />
+                    ) : (
+                        <div style={{...styles.avatar, backgroundColor: 'darkblue'}}>
+                            {getInitials(auth.currentUser?.displayName)}
+                        </div>
+                    )
+                }
                 <div>
                     <div>{currentUser?.username}</div>
                 </div>

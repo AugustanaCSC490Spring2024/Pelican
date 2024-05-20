@@ -4,7 +4,7 @@ import minus from './../../../../assets/minus.png'
 import search from './../../../../assets/search.png'
 import avatar from './../../../../assets/avatar.png'
 import { useUserStore } from '../../../../data/userStore'
-import { db } from '../../../../data/firebase'
+import { db, auth } from '../../../../data/firebase'
 import { onSnapshot, doc, getDoc, updateDoc } from 'firebase/firestore'
 import AddUser from './addUser/AddUser'
 import { useChatStore } from '../../../../data/chatStore'
@@ -58,6 +58,11 @@ export default function ChatList() {
         }
     }
 
+    const getInitials = (name) => {
+        let initials = name?.split(' ').map((name) => name[0]).join('')
+        return initials
+    }
+
     return ( 
         <div style={styles.chatList}>
             <div style={styles.search}>
@@ -72,7 +77,19 @@ export default function ChatList() {
                     onClick={() => setAddMode(!addMode)}
                 />
             </div>
-            {chats.map((chat) => (
+            {chats.map((chat) => {
+                const alterPic = chat.user?.photoURL ? (
+                    <img 
+                        style={styles.userImage}
+                        src={chat.user.photoURL}
+                        alt="User" 
+                    />
+                ) : (
+                    <div style={{...styles.avatar, backgroundColor: 'darkblue'}}>
+                        {getInitials(chat.user.username)}
+                    </div>
+                )
+                return (
                 <div 
                     style={{...styles.item, backgroundColor: chat?.isSeen ? 'transparent' : 'rgba(17, 25, 40, 0.7)'}} 
                     key={chat.chatId} 
@@ -84,8 +101,11 @@ export default function ChatList() {
                         <div style={styles.itemMessage}>{chat.lastMessage}</div>
                     </div>
                 </div>
-            ))}
-            {addMode && <AddUser />}
+                )
+            })}
+            {/* {addMode &&  */}
+                <AddUser />
+            {/* } */}
         </div>
     )
 }

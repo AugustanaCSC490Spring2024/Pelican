@@ -25,7 +25,8 @@ function SignIn() {
                 await setDoc(userDocRef, {
                     uid: user.uid,
                     username: user.displayName,
-                    email: user.email
+                    email: user.email,
+                    photoURL: user.photoURL
                 });
 
                 await setDoc(doc(firestore, 'userchats', user.uid), {

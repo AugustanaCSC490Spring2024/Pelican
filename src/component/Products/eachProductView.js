@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { db } from '../../data/firebase';
+import { db, auth } from '../../data/firebase';
 import { doc, getDoc } from "firebase/firestore";
 import { StarIcon } from '@heroicons/react/20/solid';
 import ShowProducts from '../Products/showProducts.js';
+import { serverTimestamp } from '@firebase/firestore';
+import { arrayUnion, collection, setDoc, updateDoc } from '@firebase/firestore';
+import { useUserStore } from '../../data/userStore';
+import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
+
 
 //temporary 
 const reviews = { href: '#', average: 4, totalCount: 117 }
 
 const EachProductView = () => {
   const { productId } = useParams();
-  const [product, setProduct] = useState(null); 
+  const [product, setProduct] = useState(null);  
+  const navigate = useNavigate(); 
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -45,6 +52,75 @@ const EachProductView = () => {
     return <div>Loading...</div>;
   }
 
+  const handleChat = async (e) => {
+    e.preventDefault();
+
+    if (!auth.currentUser) {
+      toast.error("You must be logged in to start a chat.");
+      navigate('/')
+      return;
+    } 
+ 
+    console.log('Button clicked');
+    const chatRef = collection(db, 'chats');
+    const userChatsRef = collection(db, 'userchats');
+    
+    try {
+      const newChatRef = doc(chatRef); 
+        await setDoc(newChatRef, {
+            createdAt: serverTimestamp(),
+            messages: [],
+        });
+
+        // Add the new chat to the user's chat list
+        await setDoc(doc(userChatsRef, auth.currentUser.uid), {
+            chats: arrayUnion({
+                chatId: newChatRef.id,
+                lastMessage: "",
+                receiverId: product.sellerId,
+                updatedAt: Date.now(),
+            }),
+        }, { merge: true });
+
+        // Add the new chat to the seller's chat list
+        await setDoc(doc(userChatsRef, product.sellerId), {
+            chats: arrayUnion({
+                chatId: newChatRef.id,
+                lastMessage: "",
+                receiverId: auth.currentUser.uid,
+                updatedAt: Date.now(),
+            }),
+        }, { merge: true });
+
+        toast.success("Started chat with seller");
+        console.log(newChatRef.id); 
+        navigate(`/chat`);
+    } catch (error) {
+        console.log(error);
+        toast.error("Failed to start chat");
+    }
+  } 
+
+
+
+  const handleChat2 = async (e) => {
+    e.preventDefault();
+    const sellerId = product.user;
+
+    if (!auth.currentUser) {
+      toast.error("Please log in to start a chat.");
+      navigate('/');  
+      return;
+    }
+
+    if (!sellerId) {
+      toast.error("Seller information is missing.");
+      return;
+    }
+
+    navigate(`/chat/${sellerId}`, { state: { productId } });
+  }
+  
   return (
     <div className="bg-white">
       <div className="pt-6">
@@ -73,7 +149,8 @@ const EachProductView = () => {
           {/* Product info */}
           <div className="px-4 pb-16 sm:px-6 lg:max-w-7xl lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16 ms-10">
             <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-              <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl" style={{marginBottom: '15px'}}>{product.name}</h1>
+              <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{product.name}</h1>
+              <h3 className='text-l tracking-tight text-gray-500' style={{marginBottom: '15px'}}>Sold by @{product.user}</h3>
               <h3 className='text-xl tracking-tight text-gray-900' style={{marginBottom: '10px'}}>{product.category}</h3>
             </div>
 
@@ -106,22 +183,23 @@ const EachProductView = () => {
               </div>
             
               {/* Button */}
-              <form className="mt-10">
+              <div className="mt-10">
                 <div> 
-                <button
-                    type="submit"
-                    className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                  >
-                  Chat with seller
-                </button>
-                <button
-                    type="submit"
-                    className="mt-5 flex w-full items-center justify-center rounded-md border border-blue-600 bg-white px-8 py-3 text-base font-medium text-blue-600 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                  >
-                  Add to Favorite List
-                </button>
+                  <button
+                      // type="submit"
+                      className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                      onClick={handleChat}
+                    >
+                    Chat with seller
+                  </button>
+                  <button
+                      type="submit"
+                      className="mt-5 flex w-full items-center justify-center rounded-md border border-blue-600 bg-white px-8 py-3 text-base font-medium text-blue-600 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    >
+                    Add to Favorite List
+                  </button>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>

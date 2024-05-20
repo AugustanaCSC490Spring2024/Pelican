@@ -14,11 +14,11 @@ import { onSnapshot, doc, updateDoc, arrayUnion, getDoc } from '@firebase/firest
 import { db } from './../../../data/firebase'
 import { useChatStore } from '../../../data/chatStore'
 import { useUserStore } from '../../../data/userStore'
+import { formatDistanceToNow } from "date-fns";
 
 export default function Chat() {
   const [openEmoji, setOpenEmoji] = useState(false);
-  const [text, setText] = useState('');
-  const [messages, setMessages] = useState([]);
+  const [text, setText] = useState(''); 
   const [chat, setChat] = useState()
 
   const { chatId, user } = useChatStore()
@@ -81,13 +81,14 @@ export default function Chat() {
     } catch (error) {
       console.log(error)
     }
+    setText('');
   }
 
   return (
       <div style={styles.chat}>
         <div style={styles.top}>
           <div style={styles.user}>
-            <img style={styles.img} src={avatar} alt="" />
+            <img style={styles.img} src={user?.photoURL || avatar} alt="" />
             <div style={styles.profileInfo}>
               <span style={styles.infoName}>{user?.username}</span>
               <p style={styles.infoMsg}>{text}</p>
@@ -100,62 +101,21 @@ export default function Chat() {
           </div>
           </div>
           <div style={styles.center}>
-            {/* <div style={styles.message}>
-              <img style={styles.img} src={avatar} alt="" />
-              <div style={styles.info}>
-                <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus 
-                quis quae qui! Sint asperiores vero nobis deserunt aperiam iusto
-                repellendus, optio impedit eius, reprehenderit dolorum nihil
-                magnam alias, odit quam.
-                </p>
-                <span style={{fontSize: 13}}>1 min ago</span>
-              </div>
-            </div>  */}
-            {/* <div style={styles.messageOwn}> 
-              <div style={styles.infoOwn}>
-                <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus 
-                quis quae qui! Sint asperiores vero nobis deserunt aperiam iusto
-                repellendus, optio impedit eius, reprehenderit dolorum nihil
-                magnam alias, odit quam.
-                </p>
-                <span style={{fontSize: 13}}>1 min ago</span>
-              </div>
-            </div>  */}
-            {/* <div style={styles.message}>
-              <img style={styles.img} src={avatar} alt="" />
-              <div style={styles.info}>
-                <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus 
-                quis quae qui! Sint asperiores vero nobis deserunt aperiam iusto
-                repellendus, optio impedit eius, reprehenderit dolorum nihil
-                magnam alias, odit quam.
-                </p>
-                <span style={{fontSize: 13}}>1 min ago</span>
-              </div>
-            </div>  */}
-            {chat?.messages?.map((message) => (
-              <div key={message?.createAt} style={styles.messageOwn}>
-                <img style={styles.img} src={avatar} alt="" />
-                <div style={styles.info}>
-                  <p>{message.text}</p>
-                  <span style={{fontSize: 13}}>1 min ago</span>
+            {chat?.messages?.map((message) => {
+              const isOwnMessage = message.senderId === currentUser?.uid;
+              const messageStyle = isOwnMessage ? styles.messageOwn : styles.message;
+              const infoStyle = isOwnMessage ? styles.infoOwn : styles.info;
+              
+              return (
+                <div key={message?.createAt} style={messageStyle}>
+                  {!isOwnMessage && <img style={styles.img} src={user?.photoURL || avatar} alt="" />}
+                  <div style={infoStyle}>
+                    <p>{message.text}</p>
+                    <span style={{ fontSize: 13 }}>{formatDistanceToNow(new Date(message.createAt), { addSuffix: true })}</span>
+                  </div>
                 </div>
-              </div>
-            ))}
-            {/* <div style={styles.messageOwn}> 
-              <img 
-                src={monochrome} 
-                alt='' 
-                style={{width: '100%', height: '300px', borderRadius: '10px', objectFit: 'cover'  }}
-              />
-              <div style={styles.infoOwn}>
-                <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus 
-                quis quae qui! Sint asperiores vero nobis deserunt aperiam iusto
-                repellendus, optio impedit eius, reprehenderit dolorum nihil
-                magnam alias, odit quam.
-                </p>
-                <span style={{fontSize: 13}}>1 min ago</span>
-              </div>
-            </div>  */}
+              );
+            })}
             <div ref={endRef}></div>
           </div>
           <div style={styles.bottom}>

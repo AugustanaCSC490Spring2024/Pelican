@@ -39,7 +39,7 @@ const AddUser = ( ) => {
                 createdAt: serverTimestamp(),
                 messages: [],
             })
-            await updateDoc(doc(userChatsRef, user.uid), {
+            await setDoc(doc(userChatsRef, user.uid), {
                 chats: arrayUnion({
                     chatId: newChatRef.id,
                     lastMessage: "",
@@ -48,7 +48,7 @@ const AddUser = ( ) => {
                 }),
             }, { merge: true }); 
 
-            await updateDoc(doc(userChatsRef, currentUser.uid), {
+            await setDoc(doc(userChatsRef, currentUser.uid), {
                 chats: arrayUnion({
                     chatId: newChatRef.id,
                     lastMessage: "",
@@ -66,7 +66,7 @@ const AddUser = ( ) => {
     }
     return (
         <div style={styles.addUser}>
-            <form onSubmit={handleSearch} style={{ display: 'flex', gap: 20}}>
+            <form onSubmit={handleSearch} style={{ display: 'flex', gap: 20, justifyContent: 'space-between'}}>
                 <input 
                     type="text" 
                     placeholder="Username" 
@@ -78,13 +78,13 @@ const AddUser = ( ) => {
             {user && <div style={styles.user}>
                 <div style={styles.detail}>
                     <img 
-                        src={user.avatr || avatar} 
+                        src={user.photoURL || avatar} 
                         alt="" 
                         style={styles.userImage}
                     />
                     <span>{user.username}</span>
                 </div>
-                <button style={styles.button} onClick={handleAdd}>Add User</button>
+                <button style={styles.button} onClick={handleAdd}>Chat</button>
             </div>}
         </div>
     );
@@ -136,6 +136,7 @@ const styles = {
         padding: '10px',
         borderRadius: '5px',
         border: '1px solid #e0e0e0',
+        flex: 1,
     },
     search: {
         display: 'flex',
