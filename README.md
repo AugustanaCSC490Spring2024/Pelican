@@ -2,6 +2,9 @@
 
 A centralized platform for users to buy, sell, exchange, and donate goods and services within campus community.
 
+# Blog
+
+Click [here](https://sites.google.com/augustana.edu/pelican-marketplace?usp=sharing) to acess our blog.
 
 # Getting Started with Create React App
 
