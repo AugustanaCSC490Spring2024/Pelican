@@ -1,7 +1,7 @@
 import { GoogleLogin } from '@react-oauth/google';
-import { useNavigate } from 'react-router-dom';
 import { GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 import { auth } from '../src/data/firebase';
 import './styles/tailwind.css';
 

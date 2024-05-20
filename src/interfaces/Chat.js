@@ -9,7 +9,6 @@ const Chat = () => {
     return (
         <div className="App">
             <Navigation />
-            {/* <h1>Chatting Page</h1> */}
             <ManageChat />            
         </div>
     );

@@ -1,12 +1,12 @@
-import React, { useState, useRef } from 'react';
-import { db, storage, auth } from '../../data/firebase';
-import { collection, addDoc } from 'firebase/firestore'; 
+import { addDoc, collection } from 'firebase/firestore';
 import {
+    getDownloadURL,
     ref,
     uploadBytes,
-    getDownloadURL,
 } from "firebase/storage";
+import React, { useRef, useState } from 'react';
 import defaultImage from '../../assets/icon.png';
+import { auth, db, storage } from '../../data/firebase';
 import '../../styles/addProductFrom.css';
 
 function AddProductForm() {

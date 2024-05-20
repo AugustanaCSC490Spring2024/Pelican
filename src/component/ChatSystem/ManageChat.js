@@ -38,9 +38,6 @@ export default function ManageChat() {
 const styles = {
     container: {
         display: 'flex',
-        // flexDirection: 'row',
-        // justifyContent: 'space-between',
-        // alignItems: 'center',
         width: '100%',
         height: '100vh',
         backgroundColor: '#f0f0f0'

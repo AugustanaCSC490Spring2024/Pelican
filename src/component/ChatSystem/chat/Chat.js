@@ -1,20 +1,18 @@
-import React, {useEffect, useState, useRef} from 'react'
-import './chat.css'
-import avatar from './../../../assets/avatar.png'
-import phone from './../../../assets/phone.png'
-import video from './../../../assets/video.png'
-import info from './../../../assets/info.png'
-import image from './../../../assets/img.png'
-import camera from './../../../assets/camera.png'
-import mic from './../../../assets/mic.png'
-import emoji from './../../../assets/emoji.png' 
+import { arrayUnion, doc, getDoc, onSnapshot, updateDoc } from '@firebase/firestore'
+import { formatDistanceToNow } from "date-fns"
 import EmojiPicker from 'emoji-picker-react'
-import monochrome from './../../../assets/monochrome-icon.png'
-import { onSnapshot, doc, updateDoc, arrayUnion, getDoc } from '@firebase/firestore'
-import { db } from './../../../data/firebase'
+import React, { useEffect, useRef, useState } from 'react'
 import { useChatStore } from '../../../data/chatStore'
 import { useUserStore } from '../../../data/userStore'
-import { formatDistanceToNow } from "date-fns";
+import avatar from './../../../assets/avatar.png'
+import camera from './../../../assets/camera.png'
+import emoji from './../../../assets/emoji.png'
+import image from './../../../assets/img.png'
+import info from './../../../assets/info.png'
+import mic from './../../../assets/mic.png'
+import phone from './../../../assets/phone.png'
+import video from './../../../assets/video.png'
+import { db } from './../../../data/firebase'
 
 export default function Chat() {
   const [openEmoji, setOpenEmoji] = useState(false);

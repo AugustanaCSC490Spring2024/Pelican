@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { db, auth } from '../../data/firebase';
-import { doc, getDoc } from "firebase/firestore";
+import { arrayUnion, collection, serverTimestamp, setDoc } from '@firebase/firestore';
 import { StarIcon } from '@heroicons/react/20/solid';
-import ShowProducts from '../Products/showProducts.js';
-import { serverTimestamp } from '@firebase/firestore';
-import { arrayUnion, collection, setDoc, updateDoc } from '@firebase/firestore';
-import { useUserStore } from '../../data/userStore';
+import { doc, getDoc } from "firebase/firestore";
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useNavigate } from "react-router-dom";
+import { auth, db } from '../../data/firebase';
+import ShowProducts from '../Products/showProducts.js';
 
 
 //temporary 

@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from 'react'
-import plus from './../../../../assets/plus.png'
-import minus from './../../../../assets/minus.png'
-import search from './../../../../assets/search.png'
-import avatar from './../../../../assets/avatar.png'
-import { useUserStore } from '../../../../data/userStore'
-import { db, auth } from '../../../../data/firebase'
-import { onSnapshot, doc, getDoc, updateDoc } from 'firebase/firestore'
-import AddUser from './addUser/AddUser'
+import { doc, getDoc, onSnapshot, updateDoc } from 'firebase/firestore'
+import React, { useEffect, useState } from 'react'
 import { useChatStore } from '../../../../data/chatStore'
+import { db } from '../../../../data/firebase'
+import { useUserStore } from '../../../../data/userStore'
+import avatar from './../../../../assets/avatar.png'
+import minus from './../../../../assets/minus.png'
+import plus from './../../../../assets/plus.png'
+import search from './../../../../assets/search.png'
+import AddUser from './addUser/AddUser'
 
 export default function ChatList() {
     const [addMode, setAddMode] = useState(false); 

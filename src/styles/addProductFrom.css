@@ -1,23 +1,18 @@
 .postForm {
     padding: 30px 500px;
-    /* text-align: center; */
 }
 .nameInputWrapper {
     font-size: 1em;
     font-weight: bold;
     display: flex;
     margin-top: 10px;
-    /* height: 52px !important; */
     resize: none;
     border: none;
     margin-bottom: 15px;
-    /* background-color: #ddd; */
     padding: 5px 0;
-    /* border-radius: 10px; */
     border-bottom: 1px solid #000;
 }
 .inputBox {
-    /* background-color: #ddd; */
     padding: 3px 5px;
     border-radius: 10px;
     border: 1px solid black;
