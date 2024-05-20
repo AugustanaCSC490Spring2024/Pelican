@@ -130,7 +130,7 @@ function AddProductForm() {
                 <h3 className='miniTitle'>Product Description</h3>
                 <textarea 
                     name="description" 
-                    placeholder="Type your product details..." 
+                    placeholder="Please provide your product details such as size, how used, defects, or price negotiability..." 
                     value={product.description} 
                     onChange={handleChange} 
                     cols="40" 
